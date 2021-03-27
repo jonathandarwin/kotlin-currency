@@ -20,8 +20,8 @@ class SplashFragment : BaseFragment<SplashViewModel, SplashFragmentBinding>() {
 
     private val viewModel: SplashViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
 
         CoroutineScope(Dispatchers.Main).launch {
             delay(1000)
