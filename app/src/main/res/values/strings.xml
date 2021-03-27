@@ -9,4 +9,5 @@
     <string name="convert">Convert</string>
     <string name="history">History</string>
     <string name="see_all">See All</string>
+    <string name="delete_all_history">Delete All History</string>
 </resources>
