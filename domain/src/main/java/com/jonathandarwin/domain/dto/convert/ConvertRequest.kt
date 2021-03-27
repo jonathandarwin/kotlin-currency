@@ -1,4 +1,4 @@
-package com.jonathandarwin.domain.dto
+package com.jonathandarwin.domain.dto.convert
 
 import com.jonathandarwin.domain.base.BaseRequest
 

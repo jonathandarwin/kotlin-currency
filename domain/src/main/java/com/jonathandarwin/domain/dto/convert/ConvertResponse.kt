@@ -1,4 +1,4 @@
-package com.jonathandarwin.domain.dto
+package com.jonathandarwin.domain.dto.convert
 
 /**
  * Created By : Jonathan Darwin on March 27, 2021

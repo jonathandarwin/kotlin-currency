@@ -3,6 +3,7 @@ package com.jonathandarwin.currency.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.jonathandarwin.currency.R
 import com.jonathandarwin.currency.base.BaseFragment
 import com.jonathandarwin.currency.databinding.HomeFragmentBinding
@@ -18,6 +19,18 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+    }
+
+    override fun initListener() {
+        super.initListener()
+
+        viewModel.state.observe(this, Observer {
+            when(it) {
+                HomeViewModelState.SUCCES_GET_CURRENCY -> {
+
+                }
+            }
+        })
     }
 
     override fun getVM(): HomeViewModel = viewModel

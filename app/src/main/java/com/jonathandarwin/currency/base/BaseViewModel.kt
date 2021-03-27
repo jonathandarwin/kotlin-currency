@@ -8,5 +8,11 @@ import androidx.lifecycle.ViewModel
  * Created By : Jonathan Darwin on March 27, 2021
  */ 
 abstract class BaseViewModel: ViewModel() {
-    val loading: LiveData<Boolean> = MutableLiveData<Boolean>()
+
+    var error = MutableLiveData<Throwable>()
+    val loading = MutableLiveData<Boolean>()
+
+    protected fun onError(e: Throwable) {
+        error.postValue(e)
+    }
 }

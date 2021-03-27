@@ -1,6 +1,6 @@
 package com.jonathandarwin.data.network
 
-import com.jonathandarwin.domain.dto.ConvertResponse
+import com.jonathandarwin.domain.dto.convert.ConvertResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

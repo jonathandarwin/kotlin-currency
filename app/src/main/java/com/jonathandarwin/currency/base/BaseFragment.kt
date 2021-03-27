@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.jonathandarwin.currency.databinding.ErrorBottomSheetBinding
 import com.jonathandarwin.currency.databinding.LoadingBinding
 
 /**
@@ -21,6 +23,7 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
     protected lateinit var binding : Binding
     private lateinit var root : ViewGroup
     private lateinit var loading : LoadingBinding
+    private lateinit var errorDialog: ErrorBottomSheetBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +36,7 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
 
         root = binding.root as ViewGroup
         loading = LoadingBinding.inflate(inflater, container, false)
+        errorDialog = ErrorBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,6 +44,15 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
         vm.loading.observe(viewLifecycleOwner, Observer {
             removeAllView()
             if(it) root.addView(loading.root)
+        })
+
+        vm.error.observe(this, Observer {
+            errorDialog.tvTitle.text = "Error"
+            errorDialog.tvDescription.text = it.message ?: "Please try again."
+
+            val dialog = BottomSheetDialog(requireContext())
+            dialog.setContentView(errorDialog.root)
+            dialog.show()
         })
     }
 
