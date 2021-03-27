@@ -1,4 +1,4 @@
-package com.jonathandarwin.domain.abstraction
+package com.jonathandarwin.domain.abstraction.repository
 
 import com.jonathandarwin.domain.base.Response
 import com.jonathandarwin.domain.dto.ConvertRequest

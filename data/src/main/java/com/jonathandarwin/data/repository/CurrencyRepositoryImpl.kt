@@ -1,7 +1,7 @@
 package com.jonathandarwin.data.repository
 
 import com.jonathandarwin.data.network.RemoteService
-import com.jonathandarwin.domain.abstraction.CurrencyRepository
+import com.jonathandarwin.domain.abstraction.repository.CurrencyRepository
 import com.jonathandarwin.domain.base.Response
 import com.jonathandarwin.domain.dto.ConvertRequest
 import com.jonathandarwin.domain.dto.ConvertResponse
