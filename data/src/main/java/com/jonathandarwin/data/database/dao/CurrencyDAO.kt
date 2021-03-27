@@ -12,11 +12,11 @@ import java.util.*
 @Dao
 interface CurrencyDAO {
     @Insert
-    fun insert(currencyDTO: CurrencyDTO): Long
+    suspend fun insert(currencyDTO: CurrencyDTO): Long
 
     @Query("SELECT * FROM Currency ORDER BY datetime DESC LIMIT :limit")
-    fun get(limit: Int = 10): List<CurrencyDTO>
+    suspend fun get(limit: Int = 10): List<CurrencyDTO>
 
     @Query("DELETE FROM Currency")
-    fun deleteAll(): Int
+    suspend fun deleteAll(): Int
 }

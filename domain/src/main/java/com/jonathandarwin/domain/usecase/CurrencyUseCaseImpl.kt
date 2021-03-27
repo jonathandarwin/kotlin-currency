@@ -59,7 +59,7 @@ class CurrencyUseCaseImpl @Inject constructor(
 
     override suspend fun saveConvertCurrency(convertCurrency: ConvertCurrency): Boolean {
         return convertCurrency.let {
-            val currencyDTO = CurrencyDTO(UUID.randomUUID(), it.from, it.to, it.amount, it.result, it.rate, it.datetime)
+            val currencyDTO = CurrencyDTO(0, it.from, it.to, it.amount, it.result, it.rate, it.datetime)
             return currencyRepository.saveConvertCurrency(currencyDTO)
         }
     }

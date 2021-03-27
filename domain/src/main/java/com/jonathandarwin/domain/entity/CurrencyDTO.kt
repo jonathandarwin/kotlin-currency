@@ -10,8 +10,8 @@ import java.util.*
  */
 @Entity(tableName = "Currency")
 data class CurrencyDTO(
-    @PrimaryKey()
-    val id: UUID,
+    @PrimaryKey(autoGenerate = true)
+    val id: Long,
 
     @ColumnInfo(name = "from")
     val from: String,

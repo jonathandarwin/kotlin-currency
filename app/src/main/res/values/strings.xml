@@ -7,4 +7,6 @@
     <string name="result">Result</string>
     <string name="rate">Rate :</string>
     <string name="convert">Convert</string>
+    <string name="history">History</string>
+    <string name="see_all">See All</string>
 </resources>
