@@ -223,6 +223,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
+            android:overScrollMode="never"
             tools:listitem="@layout/list_convert_currency_history_item"
             app:layout_constraintTop_toBottomOf="@id/tvHistoryTitle"
             app:layout_constraintLeft_toLeftOf="@id/tvHistoryTitle"

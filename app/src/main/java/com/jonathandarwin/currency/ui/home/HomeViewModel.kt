@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.jonathandarwin.currency.base.BaseViewModel
 import com.jonathandarwin.currency.base.dialog.ListBottomSheet
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
+import com.jonathandarwin.domain.model.ConvertCurrency
 import com.jonathandarwin.domain.model.Currency
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +26,7 @@ class HomeViewModel @Inject constructor(
 
     val state = MutableLiveData<HomeViewModelState>()
     var currencies = arrayListOf<ListBottomSheet>()
+    var history = arrayListOf<ConvertCurrency>()
 
     var from = "IDR"
     var to = "USD"
@@ -53,8 +55,11 @@ class HomeViewModel @Inject constructor(
             try{
                 loading.postValue(true)
                 val pair = currencyUseCase.convert(from, to, amount)
+
                 convertResult = pair.first.toString()
                 rate = pair.second.toString()
+                saveConvertCurrency(ConvertCurrency(from, to, amount, convertResult, rate, System.currentTimeMillis()))
+                getPreviewHistory()
 
                 loading.postValue(false)
                 state.postValue(HomeViewModelState.SUCCESS_CONVERT)
@@ -62,6 +67,19 @@ class HomeViewModel @Inject constructor(
             catch (e: Exception) {
                 onError(e)
             }
+        }
+    }
+
+    suspend fun saveConvertCurrency(convertCurrency: ConvertCurrency) {
+        currencyUseCase.saveConvertCurrency(convertCurrency)
+    }
+
+    fun getPreviewHistory() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = currencyUseCase.getConvertCurrencyHistory(10)
+            history.clear()
+            history.addAll(result)
+            state.postValue(HomeViewModelState.GET_HISTORY)
         }
     }
 }

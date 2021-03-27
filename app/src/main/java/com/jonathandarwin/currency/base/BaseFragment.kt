@@ -1,9 +1,11 @@
 package com.jonathandarwin.currency.base
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -47,14 +49,7 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
     }
 
     protected open fun initListener() {
-        vm.loading.observe(viewLifecycleOwner, Observer {
-            removeAllView()
-            if(it) root.addView(loading.root)
-        })
 
-        vm.error.observe(viewLifecycleOwner, Observer {
-            showErrorDialog(it.message ?: "Please try again.")
-        })
     }
 
     protected open fun showErrorDialog(message: String) {
@@ -70,7 +65,23 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
     }
 
     protected open fun initObserver() {
+        vm.loading.observe(viewLifecycleOwner, Observer {
+            removeAllView()
+            if(it) root.addView(loading.root)
+        })
 
+        vm.error.observe(viewLifecycleOwner, Observer {
+            showErrorDialog(it.message ?: "Please try again.")
+        })
+    }
+
+    protected fun hideSoftKeyboard(activity: Activity) {
+        val inputMethodManager: InputMethodManager = activity.getSystemService(
+                Activity.INPUT_METHOD_SERVICE
+        ) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.currentFocus?.windowToken, 0
+        )
     }
 
     private fun removeAllView() {
