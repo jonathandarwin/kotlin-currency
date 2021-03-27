@@ -1,3 +1,5 @@
+include ':data'
+include ':domain'
 include ':network'
 include ':app'
 rootProject.name = "Currency"
