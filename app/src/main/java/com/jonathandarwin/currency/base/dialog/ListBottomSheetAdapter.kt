@@ -1,9 +1,9 @@
 package com.jonathandarwin.currency.base.dialog
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.jonathandarwin.currency.databinding.ListBottomSheetBinding
 import com.jonathandarwin.currency.databinding.ListBottomSheetItemBinding
 
 /**
@@ -13,10 +13,12 @@ class ListBottomSheetAdapter : RecyclerView.Adapter<ListBottomSheetAdapter.ListB
 
     private val list = arrayListOf<ListBottomSheet>()
     private var listener: ((ListBottomSheet) -> Unit)? = null
+    private var selectedValue = ""
 
     inner class ListBottomSheetViewHolder(private val binding: ListBottomSheetItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ListBottomSheet) {
-            binding.tvLabel.text = item.label
+            binding.data = item
+            binding.tvLabel.setTypeface(binding.tvLabel.typeface, if(item.value == selectedValue) Typeface.BOLD else Typeface.NORMAL)
             binding.root.setOnClickListener { listener?.invoke(item) }
         }
     }
@@ -38,5 +40,9 @@ class ListBottomSheetAdapter : RecyclerView.Adapter<ListBottomSheetAdapter.ListB
 
     fun setOnClickListener(listener: (ListBottomSheet) -> Unit) {
         this.listener = listener
+    }
+
+    fun setSelectedValue(selectedValue: String) {
+        this.selectedValue = selectedValue
     }
 }

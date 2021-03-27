@@ -40,13 +40,19 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initListener()
+        initObserver()
+    }
+
     protected open fun initListener() {
         vm.loading.observe(viewLifecycleOwner, Observer {
             removeAllView()
             if(it) root.addView(loading.root)
         })
 
-        vm.error.observe(this, Observer {
+        vm.error.observe(viewLifecycleOwner, Observer {
             errorDialog.tvTitle.text = "Error"
             errorDialog.tvDescription.text = it.message ?: "Please try again."
 
@@ -54,6 +60,10 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
             dialog.setContentView(errorDialog.root)
             dialog.show()
         })
+    }
+
+    protected open fun initObserver() {
+
     }
 
     private fun removeAllView() {

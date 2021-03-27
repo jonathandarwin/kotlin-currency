@@ -3,6 +3,7 @@ package com.jonathandarwin.currency.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jonathandarwin.currency.base.BaseViewModel
+import com.jonathandarwin.currency.base.dialog.ListBottomSheet
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
 import com.jonathandarwin.domain.model.Currency
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,12 +22,19 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val state = MutableLiveData<HomeViewModelState>()
-    private var currencies: List<Currency> = arrayListOf()
+    var currencies = arrayListOf<ListBottomSheet>()
+
+    var from = "IDR"
+    var to = "USD"
 
     fun getCurrency() {
         CoroutineScope(Dispatchers.IO).launch {
             try{
-                currencies = currencyUseCase.getCurrencies()
+                val result = currencyUseCase.getCurrencies()
+                currencies.clear()
+                result.forEach{
+                    currencies.add(ListBottomSheet(it.name, it.code))
+                }
                 state.postValue(HomeViewModelState.SUCCES_GET_CURRENCY)
             }
             catch (e: Exception) {

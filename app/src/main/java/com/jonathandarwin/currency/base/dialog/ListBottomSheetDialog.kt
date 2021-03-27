@@ -11,9 +11,16 @@ import com.jonathandarwin.currency.databinding.ListBottomSheetBinding
  */ 
 class ListBottomSheetDialog {
     private var listener: ((ListBottomSheet) -> Unit)? = null
-    private val listAdapter = ListBottomSheetAdapter()
+    private lateinit var listAdapter: ListBottomSheetAdapter
     private val list = ArrayList<ListBottomSheet>()
     private var context: Context? = null
+    private var selectedValue = ""
+    private var title = ""
+
+    fun setTitle(title: String): ListBottomSheetDialog {
+        this.title = title
+        return this
+    }
 
     fun setContext(context: Context): ListBottomSheetDialog {
         this.context = context
@@ -31,22 +38,34 @@ class ListBottomSheetDialog {
         return this
     }
 
+    fun setSelectedValue(selectedValue: String): ListBottomSheetDialog {
+        this.selectedValue = selectedValue
+        return this
+    }
+
     fun build() {
         context?.let {
+            listAdapter = ListBottomSheetAdapter()
+
+            val dialog  = BottomSheetDialog(it)
             val binding = ListBottomSheetBinding.inflate(LayoutInflater.from(it), null, false)
             binding.recyclerView.apply {
                 layoutManager = LinearLayoutManager(it)
                 adapter = listAdapter
             }
+            binding.tvTitle.text = title
+
+            dialog.setContentView(binding.root)
+            dialog.show()
 
             listAdapter.apply {
                 updateData(list)
-                setOnClickListener { item -> listener?.invoke(item) }
+                setOnClickListener { item ->
+                    listener?.invoke(item)
+                    dialog.dismiss()
+                }
+                setSelectedValue(selectedValue)
             }
-
-            val dialog  = BottomSheetDialog(it)
-            dialog.setContentView(binding.root)
-            dialog.show()
         }
     }
 }
