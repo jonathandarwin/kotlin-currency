@@ -15,7 +15,7 @@ interface CurrencyDAO {
     fun insert(currencyDTO: CurrencyDTO): Long
 
     @Query("SELECT * FROM Currency ORDER BY datetime DESC LIMIT :limit")
-    fun getTop10(limit: Int = 10): List<CurrencyDTO>
+    fun get(limit: Int = 10): List<CurrencyDTO>
 
     @Query("DELETE FROM Currency")
     fun deleteAll(): Int

@@ -4,8 +4,11 @@ import com.jonathandarwin.domain.abstraction.repository.CurrencyRepository
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
 import com.jonathandarwin.domain.base.ApiResponse
 import com.jonathandarwin.domain.dto.convert.ConvertRequest
+import com.jonathandarwin.domain.entity.CurrencyDTO
+import com.jonathandarwin.domain.model.ConvertCurrency
 import com.jonathandarwin.domain.model.Currency
 import java.math.BigDecimal
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -52,5 +55,25 @@ class CurrencyUseCaseImpl @Inject constructor(
         }
 
         return Pair(0.0, 0.0)
+    }
+
+    override suspend fun saveConvertCurrency(convertCurrency: ConvertCurrency): Boolean {
+        return convertCurrency.let {
+            val currencyDTO = CurrencyDTO(UUID.randomUUID(), it.from, it.to, it.amount, it.result, it.rate, it.datetime)
+            return currencyRepository.saveConvertCurrency(currencyDTO)
+        }
+    }
+
+    override suspend fun getConvertCurrencyHistory(limit: Int): List<ConvertCurrency> {
+        val response = currencyRepository.getConvertCurrencyHistory(limit)
+        val result = arrayListOf<ConvertCurrency>()
+        response.forEach {
+            result.add(ConvertCurrency(it.from, it.to, it.amount, it.result, it.rate, it.datetime))
+        }
+        return result
+    }
+
+    override suspend fun deleteAllHistory(): Boolean {
+        return currencyRepository.deleteAllHistory()
     }
 }

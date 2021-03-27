@@ -9,6 +9,7 @@ import com.jonathandarwin.domain.dto.convert.ConvertRequest
 import com.jonathandarwin.domain.dto.convert.ConvertResponse
 import com.jonathandarwin.domain.dto.currencies.CurrenciesItemResponse
 import com.jonathandarwin.domain.dto.currencies.CurrenciesResponse
+import com.jonathandarwin.domain.entity.CurrencyDTO
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -42,5 +43,17 @@ class CurrencyRepositoryImpl @Inject constructor(
         currencies.add(CurrenciesItemResponse("Australian Dollar", "AUD"))
         val response = CurrenciesResponse(currencies)
         return ApiResponse.Success<CurrenciesResponse>(response)
+    }
+
+    override suspend fun saveConvertCurrency(currenyDTO: CurrencyDTO): Boolean {
+        return database.currencyDAO.insert(currenyDTO) > 0
+    }
+
+    override suspend fun getConvertCurrencyHistory(limit: Int): List<CurrencyDTO> {
+        return database.currencyDAO.get()
+    }
+
+    override suspend fun deleteAllHistory(): Boolean {
+        return database.currencyDAO.deleteAll() > 0
     }
 }
