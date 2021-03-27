@@ -46,7 +46,7 @@ class HistoryFragment : BaseFragment<HistoryViewModel, HistoryFragmentBinding>()
                     historyAdapter.updateData(viewModel.historyList)
                 }
                 HistoryViewModelState.DELETE_ALL_HISTORY -> {
-                    viewModel.getHistory()
+                    finish()
                 }
             }
         })
