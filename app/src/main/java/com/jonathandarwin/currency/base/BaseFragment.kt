@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.jonathandarwin.currency.databinding.LoadingBinding
 
 /**
@@ -43,6 +45,18 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
 
     private fun removeAllView() {
         root.removeView(loading.root)
+    }
+
+    protected fun navigate(direction: NavDirections) {
+        findNavController().navigate(direction)
+    }
+
+    protected fun navigate(id: Int) {
+        findNavController().navigate(id)
+    }
+
+    protected fun finish() {
+        findNavController().popBackStack()
     }
 
     abstract fun getVM() : VM

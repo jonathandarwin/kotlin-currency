@@ -6,6 +6,17 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.jonathandarwin.currency.ui.splash.SplashFragment"
-        android:label="SplashFragment" />
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.jonathandarwin.currency.ui.home.HomeFragment"
+        android:label="HomeFragment" />
 
 </navigation>
