@@ -51,7 +51,7 @@ ext {
     // Hilt
     hilt                        = "com.google.dagger:hilt-android:2.28-alpha"
     hilt_viewmodel              = 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
-    hilt_android_compiler       = "com.google.dagger:hilt-android-compiler:2.28-alpha"
+    hilt_android_compiler       = "com.google.dagger:hilt-android-compiler:2.31.2-alpha"
     hilt_compiler               = 'androidx.hilt:hilt-compiler:1.0.0-beta01'
 
     // Navigation Component
