@@ -1,7 +1,5 @@
 package com.jonathandarwin.domain.abstraction.usecase
 
-import com.jonathandarwin.domain.dto.currencies.CurrenciesResponse
-import com.jonathandarwin.domain.entity.CurrencyDTO
 import com.jonathandarwin.domain.model.ConvertCurrency
 import com.jonathandarwin.domain.model.Currency
 

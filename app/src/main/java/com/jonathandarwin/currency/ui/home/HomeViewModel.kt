@@ -1,19 +1,14 @@
 package com.jonathandarwin.currency.ui.home
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jonathandarwin.currency.base.BaseViewModel
 import com.jonathandarwin.currency.base.dialog.ListBottomSheet
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
 import com.jonathandarwin.domain.model.ConvertCurrency
-import com.jonathandarwin.domain.model.Currency
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
-import java.math.BigDecimal
 import javax.inject.Inject
 
 /**

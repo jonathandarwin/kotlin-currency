@@ -3,7 +3,6 @@ package com.jonathandarwin.domain.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 /**
  * Created By : Jonathan Darwin on March 27, 2021

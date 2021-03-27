@@ -1,6 +1,5 @@
 package com.jonathandarwin.currency.ui.history
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog

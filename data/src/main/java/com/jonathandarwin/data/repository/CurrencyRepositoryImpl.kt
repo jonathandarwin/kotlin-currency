@@ -10,7 +10,6 @@ import com.jonathandarwin.domain.dto.convert.ConvertResponse
 import com.jonathandarwin.domain.dto.currencies.CurrenciesItemResponse
 import com.jonathandarwin.domain.dto.currencies.CurrenciesResponse
 import com.jonathandarwin.domain.entity.CurrencyDTO
-import java.lang.Exception
 import javax.inject.Inject
 
 /**

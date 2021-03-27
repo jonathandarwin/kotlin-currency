@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jonathandarwin.currency.R
 import com.jonathandarwin.currency.base.BaseFragment
-import com.jonathandarwin.currency.base.BaseViewModel
 import com.jonathandarwin.currency.base.dialog.ListBottomSheetDialog
 import com.jonathandarwin.currency.databinding.HomeFragmentBinding
 import com.jonathandarwin.currency.ui.history.HistoryAdapter

@@ -7,8 +7,6 @@ import com.jonathandarwin.domain.dto.convert.ConvertRequest
 import com.jonathandarwin.domain.entity.CurrencyDTO
 import com.jonathandarwin.domain.model.ConvertCurrency
 import com.jonathandarwin.domain.model.Currency
-import java.math.BigDecimal
-import java.util.*
 import javax.inject.Inject
 
 /**
