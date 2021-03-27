@@ -16,5 +16,5 @@ object RetrofitBuilder {
 
     val remoteService = retrofit.create(RemoteService::class.java)
 
-    val apiKey = "97f3136e70-8d5af6c5e9-qqlu0a"
+    val apiKey = "demo"
 }
