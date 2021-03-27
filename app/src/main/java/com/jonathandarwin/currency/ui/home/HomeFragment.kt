@@ -45,6 +45,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
         binding.tvFrom.setOnClickListener(this)
         binding.tvTo.setOnClickListener(this)
         binding.btnConvert.setOnClickListener(this)
+        binding.tvSeeAll.setOnClickListener(this)
     }
 
     override fun initObserver() {
@@ -111,6 +112,10 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
                             showErrorDialog("You haven't input the amount")
                         }
                     }
+                }
+                binding.tvSeeAll -> {
+                    val direction = HomeFragmentDirections.actionHomeFragmentToHistoryFragment()
+                    navigate(direction)
                 }
             }
         }
