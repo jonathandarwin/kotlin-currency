@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.math.BigDecimal
 import javax.inject.Inject
 
 /**
@@ -52,8 +53,8 @@ class HomeViewModel @Inject constructor(
             try{
                 loading.postValue(true)
                 val pair = currencyUseCase.convert(from, to, amount)
-                convertResult = pair.first
-                rate = pair.second
+                convertResult = pair.first.toString()
+                rate = pair.second.toString()
 
                 loading.postValue(false)
                 state.postValue(HomeViewModelState.SUCCESS_CONVERT)
