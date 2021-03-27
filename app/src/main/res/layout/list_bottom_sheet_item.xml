@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.jonathandarwin.currency.base.dialog.ListBottomSheet" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        >
+
+        <TextView
+            android:id="@+id/tvLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{data.label}"
+            tools:text="Label 1"
+            android:layout_marginTop="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <View
+            style="@style/HorizontalDivider"
+            android:layout_marginTop="16dp"
+            app:layout_constraintLeft_toLeftOf="@id/tvLabel"
+            app:layout_constraintRight_toRightOf="@id/tvLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvLabel"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
