@@ -30,6 +30,12 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
         binding.tvFrom.text = viewModel.from
         binding.tvTo.text = viewModel.to
 
+        binding.etAmount.setText(viewModel.convertResult)
+        binding.etResult.setText(viewModel.convertResult)
+        binding.tvRate.text = viewModel.rate
+
+        binding.rateGroup.visibility = if(viewModel.rate != "") View.VISIBLE else View.INVISIBLE
+
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = historyAdapter
