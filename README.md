@@ -4,6 +4,7 @@ Made with Jetpack Libraries &amp; Clean Architecture
 <b>What's Inside</b>
 <ul>
   <li>MVVM</li>
+  <li>Modularization</li>
   <li>Data Binding</li>
   <li>Retrofit</li>
   <li>Navigation Component</li>
