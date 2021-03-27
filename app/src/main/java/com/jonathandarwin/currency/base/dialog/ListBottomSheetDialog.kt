@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.jonathandarwin.currency.R
 import com.jonathandarwin.currency.databinding.ListBottomSheetBinding
 
 /**
@@ -47,7 +48,7 @@ class ListBottomSheetDialog {
         context?.let {
             listAdapter = ListBottomSheetAdapter()
 
-            val dialog  = BottomSheetDialog(it)
+            val dialog  = BottomSheetDialog(it, R.style.BottomSheetDialogTheme)
             val binding = ListBottomSheetBinding.inflate(LayoutInflater.from(it), null, false)
             binding.recyclerView.apply {
                 layoutManager = LinearLayoutManager(it)

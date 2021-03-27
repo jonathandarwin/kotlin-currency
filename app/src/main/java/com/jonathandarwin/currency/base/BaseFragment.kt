@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.jonathandarwin.currency.R
 import com.jonathandarwin.currency.databinding.ErrorBottomSheetBinding
 import com.jonathandarwin.currency.databinding.LoadingBinding
 
@@ -59,7 +60,7 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
         errorDialog.tvTitle.text = "Error"
         errorDialog.tvDescription.text = message
 
-        val dialog = BottomSheetDialog(requireContext())
+        val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         dialog.setContentView(errorDialog.root)
         dialog.show()
     }
