@@ -1,0 +1,62 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.jonathandarwin.currency"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation rootProject.ext.kotlin
+    implementation rootProject.ext.core
+    implementation rootProject.ext.appcompat
+    implementation rootProject.ext.material
+
+    // RecyclerView
+    implementation rootProject.ext.recyclerview
+
+    // Navigation Component
+    implementation rootProject.ext.nav_ui
+    implementation rootProject.ext.nav_fragment
+
+    // Hilt
+    implementation rootProject.ext.hilt
+    implementation rootProject.ext.hilt_viewmodel
+    kapt rootProject.ext.hilt_android_compiler
+    kapt rootProject.ext.hilt_compiler
+
+
+    testImplementation rootProject.ext.junit
+    androidTestImplementation rootProject.ext.android_junit
+    androidTestImplementation rootProject.ext.espresso
+}

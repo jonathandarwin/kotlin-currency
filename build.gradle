@@ -1,0 +1,68 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = "1.3.72"
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.1.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28-alpha'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+ext {
+    kotlin                      = "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    core                        = 'androidx.core:core-ktx:1.3.2'
+    appcompat                   = 'androidx.appcompat:appcompat:1.2.0'
+    material                    = 'com.google.android.material:material:1.3.0'
+
+    // Fragment
+    fragment                    = "androidx.fragment:fragment-ktx:1.2.5"
+
+    // RecyclerView
+    recyclerview                = 'androidx.recyclerview:recyclerview:1.1.0'
+
+    // Retrofit
+    retrofit                    = 'com.squareup.retrofit2:retrofit:2.9.0'
+    gson                        = 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // ViewModel
+    viewmodel                   = 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    // Room
+
+    // Coroutine
+    coroutine                   = 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
+
+    // Hilt
+    hilt                        = "com.google.dagger:hilt-android:2.28-alpha"
+    hilt_viewmodel              = 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    hilt_android_compiler       = "com.google.dagger:hilt-android-compiler:2.28-alpha"
+    hilt_compiler               = 'androidx.hilt:hilt-compiler:1.0.0-beta01'
+
+    // Navigation Component
+    nav_fragment                = "androidx.navigation:navigation-fragment-ktx:2.3.1"
+    nav_ui                      = "androidx.navigation:navigation-ui-ktx:2.3.1"
+
+    junit                       = 'junit:junit:4.13.2'
+    android_junit               = 'androidx.test.ext:junit:1.1.2'
+    espresso                    = 'androidx.test.espresso:espresso-core:3.3.0'
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
