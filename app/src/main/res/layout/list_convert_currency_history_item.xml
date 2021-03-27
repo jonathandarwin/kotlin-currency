@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="data"
+            type="com.jonathandarwin.domain.model.ConvertCurrency" />
 
+        <variable
+            name="displayDateTime"
+            type="String"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -29,6 +35,7 @@
                 android:id="@+id/tvDateTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="@{displayDateTime}"
                 tools:text="25 Maret 2020 12:23:32"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -40,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
+                android:text="@{data.from}"
                 tools:text="IDR"
                 android:textSize="16dp"
                 android:textColor="@color/black"
@@ -64,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_right"
                 android:layout_marginStart="4dp"
+                android:text="@{data.to}"
                 tools:text="USD"
                 android:textSize="16dp"
                 android:textColor="@color/black"
@@ -77,6 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:text="@{data.amount}"
                 tools:text="15000"
                 android:textStyle="bold"
                 android:textSize="20dp"
@@ -102,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_right"
                 android:layout_marginStart="4dp"
+                android:text="@{data.result}"
                 tools:text="3.5"
                 android:textStyle="bold"
                 android:textSize="20dp"
@@ -111,7 +122,20 @@
                 app:layout_constraintLeft_toRightOf="@id/icRight2"
                 />
 
+            <TextView
+                android:id="@+id/tvRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{`Rate : ` + data.rate}"
+                tools:text="rate: 123.432"
+                android:layout_marginStart="4dp"
+                app:layout_constraintLeft_toRightOf="@id/tvResult"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvResult"
+                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
 </layout>
