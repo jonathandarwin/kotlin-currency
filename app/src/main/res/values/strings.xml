@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Currency</string>
+
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="convert">To</string>
 </resources>
