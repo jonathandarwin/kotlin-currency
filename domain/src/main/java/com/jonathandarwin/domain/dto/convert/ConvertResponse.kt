@@ -11,15 +11,15 @@ data class ConvertResponse(
 )
 
 data class ConvertItemResponse(
-    val IDR: Double?,
-    val USD: Double?,
-    val SGD: Double?,
-    val JPY: Double?,
-    val KRW: Double?,
-    val MYR: Double?,
-    val HKD: Double?,
-    val CNY: Double?,
-    val AUD: Double?,
+    val IDR: String?,
+    val USD: String?,
+    val SGD: String?,
+    val JPY: String?,
+    val KRW: String?,
+    val MYR: String?,
+    val HKD: String?,
+    val CNY: String?,
+    val AUD: String?,
 
-    val rate: Double?
+    val rate: String?
 )

@@ -29,25 +29,26 @@ class CurrencyUseCaseImpl @Inject constructor(
         }
     }
 
-    override suspend fun convert(from: String, to: String, amount: String): Double {
+    override suspend fun convert(from: String, to: String, amount: String): Pair<String, String> {
         val response = currencyRepository.convert(ConvertRequest(from, to, amount))
         if(response is ApiResponse.Success) {
             return response.data.let {
-                return when(to) {
-                    "IDR" -> it.result?.IDR ?: 0.0
-                    "USD" -> it.result?.USD ?: 0.0
-                    "SGD" -> it.result?.SGD ?: 0.0
-                    "JPY" -> it.result?.JPY ?: 0.0
-                    "KRW" -> it.result?.KRW ?: 0.0
-                    "MYR" -> it.result?.MYR ?: 0.0
-                    "HKD" -> it.result?.HKD ?: 0.0
-                    "CNY" -> it.result?.CNY ?: 0.0
-                    "AUD" -> it.result?.AUD ?: 0.0
-                    else -> 0.0
+                val result = when(to) {
+                    "IDR" -> it.result?.IDR ?: "0.0"
+                    "USD" -> it.result?.USD ?: "0.0"
+                    "SGD" -> it.result?.SGD ?: "0.0"
+                    "JPY" -> it.result?.JPY ?: "0.0"
+                    "KRW" -> it.result?.KRW ?: "0.0"
+                    "MYR" -> it.result?.MYR ?: "0.0"
+                    "HKD" -> it.result?.HKD ?: "0.0"
+                    "CNY" -> it.result?.CNY ?: "0.0"
+                    "AUD" -> it.result?.AUD ?: "0.0"
+                    else -> "0.0"
                 }
+                return Pair(result, it.result?.rate ?: "0.0")
             }
         }
 
-        return 0.0
+        return Pair("0.0", "0.0")
     }
 }

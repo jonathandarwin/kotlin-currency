@@ -46,7 +46,10 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
 
                 }
                 HomeViewModelState.SUCCESS_CONVERT -> {
-                    binding.etResult.setText(viewModel.convertResult.toString())
+                    binding.etResult.setText(viewModel.convertResult)
+                    binding.tvRate.text = viewModel.rate
+
+                    binding.rateGroup.visibility = View.VISIBLE
                 }
             }
         })
@@ -85,6 +88,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
                     val isLoading = viewModel.loading.value ?: false
                     if(!isLoading) {
                         if(!binding.etAmount.text.isNullOrEmpty()) {
+                            binding.rateGroup.visibility = View.INVISIBLE
                             viewModel.convert(binding.etAmount.text.toString())
                         }
                         else {

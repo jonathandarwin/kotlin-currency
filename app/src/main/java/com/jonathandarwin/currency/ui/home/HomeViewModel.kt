@@ -28,7 +28,8 @@ class HomeViewModel @Inject constructor(
     var from = "IDR"
     var to = "USD"
 
-    var convertResult = 0.0
+    var convertResult = "0.0"
+    var rate = "0.0"
 
     fun getCurrency() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -50,7 +51,10 @@ class HomeViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             try{
                 loading.postValue(true)
-                convertResult = currencyUseCase.convert(from, to, amount)
+                val pair = currencyUseCase.convert(from, to, amount)
+                convertResult = pair.first
+                rate = pair.second
+
                 loading.postValue(false)
                 state.postValue(HomeViewModelState.SUCCESS_CONVERT)
             }
