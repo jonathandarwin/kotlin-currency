@@ -8,7 +8,7 @@ import java.util.*
  */
 object DateTimeUtil {
     fun convertToDate(time: Long): Date {
-        return Date(time * 1000L)
+        return Date(time)
     }
 
     fun Date.ddMMMyyyyHHmm(): String {
