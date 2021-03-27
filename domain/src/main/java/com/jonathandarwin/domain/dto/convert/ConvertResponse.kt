@@ -11,6 +11,7 @@ data class ConvertResponse(
 )
 
 data class ConvertItemResponse(
+    val IDR: Double?,
     val USD: Double?,
     val SGD: Double?,
     val JPY: Double?,
