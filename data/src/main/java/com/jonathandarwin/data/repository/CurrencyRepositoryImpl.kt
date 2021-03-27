@@ -1,5 +1,6 @@
 package com.jonathandarwin.data.repository
 
+import com.jonathandarwin.data.database.AppDatabase
 import com.jonathandarwin.data.network.RemoteService
 import com.jonathandarwin.data.network.RetrofitBuilder
 import com.jonathandarwin.domain.abstraction.repository.CurrencyRepository
@@ -15,7 +16,8 @@ import javax.inject.Inject
  * Created By : Jonathan Darwin on March 27, 2021
  */ 
 class CurrencyRepositoryImpl @Inject constructor(
-    private val remoteService: RemoteService
+    private val remoteService: RemoteService,
+    private val database: AppDatabase
 ) : CurrencyRepository {
 
     override suspend fun convert(request: ConvertRequest): ApiResponse<ConvertResponse> {

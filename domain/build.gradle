@@ -42,4 +42,8 @@ dependencies {
     implementation rootProject.ext.hilt
     kapt rootProject.ext.hilt_android_compiler
     kapt rootProject.ext.hilt_compiler
+
+    // Room
+    implementation rootProject.ext.room
+    kapt rootProject.ext.room_compiler
 }
