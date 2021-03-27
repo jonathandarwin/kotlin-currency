@@ -1,7 +1,9 @@
 package com.jonathandarwin.currency.ui.history
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,6 +45,9 @@ class HistoryFragment : BaseFragment<HistoryViewModel, HistoryFragmentBinding>()
                 HistoryViewModelState.GET_HISTORY -> {
                     historyAdapter.updateData(viewModel.historyList)
                 }
+                HistoryViewModelState.DELETE_ALL_HISTORY -> {
+                    viewModel.getHistory()
+                }
             }
         })
     }
@@ -52,7 +57,16 @@ class HistoryFragment : BaseFragment<HistoryViewModel, HistoryFragmentBinding>()
             when(it) {
                 binding.icBack -> finish()
                 binding.tvDeleteAll -> {
-
+                    val confirmation = AlertDialog.Builder(requireContext())
+                            .setTitle("Confirmation")
+                            .setMessage("Are you sure want to delete all your history?")
+                            .setPositiveButton("Yes") {
+                                _, _ -> viewModel.deleteAllHistory()
+                            }
+                            .setNegativeButton("No") {
+                                dialog, _ -> dialog.dismiss()
+                            }
+                            .show()
                 }
             }
         }

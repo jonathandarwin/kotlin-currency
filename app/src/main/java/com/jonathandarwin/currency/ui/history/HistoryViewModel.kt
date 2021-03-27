@@ -33,4 +33,13 @@ class HistoryViewModel @Inject constructor(
             state.postValue(HistoryViewModelState.GET_HISTORY)
         }
     }
+
+    fun deleteAllHistory() {
+        CoroutineScope(Dispatchers.IO).launch {
+            loading.postValue(true)
+            currencyUseCase.deleteAllHistory()
+            loading.postValue(false)
+            state.postValue(HistoryViewModelState.DELETE_ALL_HISTORY)
+        }
+    }
 }
