@@ -8,5 +8,5 @@ import com.jonathandarwin.domain.model.Currency
  */ 
 interface CurrencyUseCase {
     suspend fun getCurrencies(): List<Currency>
-    suspend fun convert(from: String, to: String): Double
+    suspend fun convert(from: String, to: String, amount: String): Double
 }

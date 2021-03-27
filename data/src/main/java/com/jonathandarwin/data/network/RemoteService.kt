@@ -11,7 +11,8 @@ import retrofit2.http.Query
 interface RemoteService {
 
     @GET("/convert")
-    fun convert(@Query("from") from: String,
+    suspend fun convert(@Query("from") from: String,
                 @Query("to") to: String,
-                @Query("apiKey") apiKey: String): Response<ConvertResponse>
+                @Query("amuont") amount: String,
+                @Query("api_key") apiKey: String): Response<ConvertResponse>
 }

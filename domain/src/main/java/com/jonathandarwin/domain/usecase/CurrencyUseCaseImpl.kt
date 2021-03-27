@@ -29,8 +29,8 @@ class CurrencyUseCaseImpl @Inject constructor(
         }
     }
 
-    override suspend fun convert(from: String, to: String): Double {
-        val response = currencyRepository.convert(ConvertRequest(from, to))
+    override suspend fun convert(from: String, to: String, amount: String): Double {
+        val response = currencyRepository.convert(ConvertRequest(from, to, amount))
         if(response is ApiResponse.Success) {
             return response.data.let {
                 return when(to) {

@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.jonathandarwin.currency.R
 import com.jonathandarwin.currency.base.BaseFragment
+import com.jonathandarwin.currency.base.BaseViewModel
 import com.jonathandarwin.currency.base.dialog.ListBottomSheetDialog
 import com.jonathandarwin.currency.databinding.HomeFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +34,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
         super.initListener()
         binding.tvFrom.setOnClickListener(this)
         binding.tvTo.setOnClickListener(this)
+        binding.btnConvert.setOnClickListener(this)
     }
 
     override fun initObserver() {
@@ -40,8 +42,11 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
 
         viewModel.state.observe(this, Observer {
             when(it) {
-                HomeViewModelState.SUCCES_GET_CURRENCY -> {
+                HomeViewModelState.SUCCESS_GET_CURRENCY -> {
 
+                }
+                HomeViewModelState.SUCCESS_CONVERT -> {
+                    binding.etResult.setText(viewModel.convertResult.toString())
                 }
             }
         })
@@ -75,6 +80,17 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
                                 binding.tvTo.text = item.value
                         }
                         .build()
+                }
+                binding.btnConvert -> {
+                    val isLoading = viewModel.loading.value ?: false
+                    if(!isLoading) {
+                        if(!binding.etAmount.text.isNullOrEmpty()) {
+                            viewModel.convert(binding.etAmount.text.toString())
+                        }
+                        else {
+                            showErrorDialog("You haven't input the amount")
+                        }
+                    }
                 }
             }
         }

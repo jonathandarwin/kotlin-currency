@@ -1,5 +1,6 @@
 package com.jonathandarwin.data.repository
 
+import android.util.Log
 import com.jonathandarwin.data.network.RemoteService
 import com.jonathandarwin.data.network.RetrofitBuilder
 import com.jonathandarwin.domain.abstraction.repository.CurrencyRepository
@@ -19,12 +20,14 @@ class CurrencyRepositoryImpl @Inject constructor(
 ) : CurrencyRepository {
 
     override suspend fun convert(request: ConvertRequest): ApiResponse<ConvertResponse> {
-        val response = remoteService.convert(request.from, request.to, RetrofitBuilder.apiKey)
+        val response = remoteService.convert(request.from, request.to, request.amount, RetrofitBuilder.apiKey)
+        Log.d("masuksiniga", "response : $response")
         if(response.isSuccessful){
             return ApiResponse.Success(response.body()!!)
         }
-
-        throw Exception("Please try again.")
+        else {
+            throw Exception("Please try again.")
+        }
     }
 
     override suspend fun getCurrencies(): ApiResponse<CurrenciesResponse> {

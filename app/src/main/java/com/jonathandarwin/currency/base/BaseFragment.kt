@@ -36,7 +36,7 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
 
         root = binding.root as ViewGroup
         loading = LoadingBinding.inflate(inflater, container, false)
-        errorDialog = ErrorBottomSheetBinding.inflate(inflater, container, false)
+        errorDialog = ErrorBottomSheetBinding.inflate(inflater, null, false)
         return binding.root
     }
 
@@ -53,13 +53,20 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
         })
 
         vm.error.observe(viewLifecycleOwner, Observer {
-            errorDialog.tvTitle.text = "Error"
-            errorDialog.tvDescription.text = it.message ?: "Please try again."
-
-            val dialog = BottomSheetDialog(requireContext())
-            dialog.setContentView(errorDialog.root)
-            dialog.show()
+            showErrorDialog(it.message ?: "Please try again.")
         })
+    }
+
+    protected open fun showErrorDialog(message: String) {
+        removeAllView()
+
+        errorDialog = ErrorBottomSheetBinding.inflate(LayoutInflater.from(requireContext()), null, false)
+        errorDialog.tvTitle.text = "Error"
+        errorDialog.tvDescription.text = message
+
+        val dialog = BottomSheetDialog(requireContext())
+        dialog.setContentView(errorDialog.root)
+        dialog.show()
     }
 
     protected open fun initObserver() {
@@ -68,6 +75,7 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
 
     private fun removeAllView() {
         root.removeView(loading.root)
+        root.removeView(errorDialog.root)
     }
 
     protected fun navigate(direction: NavDirections) {

@@ -4,5 +4,6 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="amount">Amount</string>
+    <string name="result">Result</string>
     <string name="convert">Convert</string>
 </resources>

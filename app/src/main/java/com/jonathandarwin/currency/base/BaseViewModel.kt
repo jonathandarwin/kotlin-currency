@@ -13,6 +13,7 @@ abstract class BaseViewModel: ViewModel() {
     val loading = MutableLiveData<Boolean>()
 
     protected fun onError(e: Throwable) {
+        loading.postValue(false)
         error.postValue(e)
     }
 }

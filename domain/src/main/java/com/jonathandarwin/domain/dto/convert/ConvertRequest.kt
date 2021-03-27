@@ -7,5 +7,6 @@ import com.jonathandarwin.domain.base.BaseRequest
  */ 
 data class ConvertRequest(
     val from: String,
-    val to: String
+    val to: String,
+    val amount: String
 ) : BaseRequest()
