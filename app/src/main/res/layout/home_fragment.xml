@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="16dp"
-                android:background="@color/white"
+                android:background="@color/cardBackground"
                 >
 
                 <TextView
@@ -170,6 +170,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/convert"
                     android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_button"
+                    android:textColor="@color/white"
                     app:layout_constraintTop_toBottomOf="@id/tvRate"
                     app:layout_constraintLeft_toLeftOf="@id/etAmount"
                     app:layout_constraintRight_toRightOf="@id/etResult"
