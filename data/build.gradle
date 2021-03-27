@@ -37,6 +37,7 @@ android {
 
 dependencies {
     implementation rootProject.ext.kotlin
+    implementation rootProject.ext.ktx
 
     // Retrofit
     implementation rootProject.ext.retrofit
@@ -49,6 +50,7 @@ dependencies {
 
     // Room
     implementation rootProject.ext.room
+    implementation rootProject.ext.room_ktx
     kapt rootProject.ext.room_compiler
 
     implementation project(':domain')

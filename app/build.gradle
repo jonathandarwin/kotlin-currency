@@ -40,7 +40,7 @@ android {
 
 dependencies {
     implementation rootProject.ext.kotlin
-    implementation rootProject.ext.core
+    implementation rootProject.ext.ktx
     implementation rootProject.ext.appcompat
     implementation rootProject.ext.material
 
@@ -57,6 +57,10 @@ dependencies {
     kapt rootProject.ext.hilt_android_compiler
     kapt rootProject.ext.hilt_compiler
 
+    // Room
+    implementation rootProject.ext.room
+    implementation rootProject.ext.room_ktx
+    kapt rootProject.ext.room_compiler
 
     testImplementation rootProject.ext.junit
     androidTestImplementation rootProject.ext.android_junit
