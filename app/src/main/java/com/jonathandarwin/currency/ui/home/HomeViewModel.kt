@@ -1,5 +1,6 @@
 package com.jonathandarwin.currency.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jonathandarwin.currency.base.BaseViewModel
@@ -51,6 +52,7 @@ class HomeViewModel @Inject constructor(
                 loading.postValue(true)
                 convertResult = currencyUseCase.convert(from, to, amount)
                 loading.postValue(false)
+                state.postValue(HomeViewModelState.SUCCESS_CONVERT)
             }
             catch (e: Exception) {
                 onError(e)
