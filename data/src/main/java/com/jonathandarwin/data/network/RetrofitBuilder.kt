@@ -1,4 +1,4 @@
-package com.jonathandarwin.network
+package com.jonathandarwin.data.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
