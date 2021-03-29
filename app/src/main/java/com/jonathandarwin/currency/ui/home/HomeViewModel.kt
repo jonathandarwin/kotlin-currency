@@ -1,6 +1,7 @@
 package com.jonathandarwin.currency.ui.home
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.jonathandarwin.currency.base.BaseViewModel
 import com.jonathandarwin.currency.base.dialog.ListBottomSheet
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
@@ -31,7 +32,7 @@ class HomeViewModel @Inject constructor(
     var rate = ""
 
     fun getCurrency() {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             try{
                 val result = currencyUseCase.getCurrencies()
                 currencies.clear()
@@ -48,7 +49,7 @@ class HomeViewModel @Inject constructor(
 
     fun convert(amount: String) {
         this.amount = amount
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             try{
                 loading.postValue(true)
                 val pair = currencyUseCase.convert(from, to, amount)
@@ -72,7 +73,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getPreviewHistory() {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             val result = currencyUseCase.getConvertCurrencyHistory(10)
             history.clear()
             history.addAll(result)

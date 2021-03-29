@@ -1,6 +1,7 @@
 package com.jonathandarwin.currency.ui.history
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.jonathandarwin.currency.base.BaseViewModel
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
 import com.jonathandarwin.domain.model.ConvertCurrency
@@ -24,7 +25,7 @@ class HistoryViewModel @Inject constructor(
 
 
     fun getHistory() {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             loading.postValue(true)
             val result = currencyUseCase.getConvertCurrencyHistory(50)
             historyList.clear()
@@ -35,7 +36,7 @@ class HistoryViewModel @Inject constructor(
     }
 
     fun deleteAllHistory() {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             loading.postValue(true)
             currencyUseCase.deleteAllHistory()
             loading.postValue(false)
