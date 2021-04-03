@@ -53,5 +53,8 @@ dependencies {
     implementation rootProject.ext.room_ktx
     kapt rootProject.ext.room_compiler
 
+    testImplementation rootProject.ext.mockk
+    testImplementation rootProject.ext.junit
+
     implementation project(':domain')
 }
