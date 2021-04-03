@@ -11,5 +11,6 @@ Made with Jetpack Libraries &amp; Clean Architecture
   <li>Hilt</li>
   <li>Coroutine</li>
   <li>Room</li>
+  <li>Unit Testing</li>
   <li>Clean Architecture</li>
 </ul>
