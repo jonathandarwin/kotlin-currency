@@ -3,6 +3,7 @@ package com.jonathandarwin.currency.util
 import com.jonathandarwin.currency.util.DateTimeUtil.ddMMMyyyyHHmm
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -11,8 +12,10 @@ import java.util.*
 class DateTimeUtilTest {
 
     @Test
-    fun `test_convert_date_ddMMyyyy`() {
-        val time = 1617422567477
-        assertEquals(DateTimeUtil.convertToDate(time).ddMMMyyyyHHmm(), "03 Apr 2021 11:02")
+    fun `test convert date dd MMM yyyy HHmm`() {
+        val currentDate = Date()
+        val output = SimpleDateFormat("dd MMM yyyy HH:mm")
+        val result = output.format(currentDate)
+        assertEquals(DateTimeUtil.convertToDate(currentDate.time).ddMMMyyyyHHmm(), result)
     }
 }

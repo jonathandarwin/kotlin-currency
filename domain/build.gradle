@@ -46,4 +46,10 @@ dependencies {
     // Room
     implementation rootProject.ext.room
     kapt rootProject.ext.room_compiler
+
+    // Coroutine
+    implementation rootProject.ext.coroutine
+
+    testImplementation rootProject.ext.junit
+    testImplementation rootProject.ext.mockk
 }
