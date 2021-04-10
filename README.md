@@ -1,5 +1,9 @@
 # kotlin-currency
-[![CircleCI](https://circleci.com/gh/jonathandarwin/kotlin-currency.svg?style=svg&circle-token=6a2079f2d0b00c01ffb633e98018148150e91753)](https://app.circleci.com/pipelines/github/jonathandarwin/kotlin-currency)
+
+[![CircleCI](https://circleci.com/gh/jonathandarwin/kotlin-currency.svg?style=shield&circle-token=6a2079f2d0b00c01ffb633e98018148150e91753)](https://app.circleci.com/pipelines/github/jonathandarwin/kotlin-currency)
+
+<br />
+<br />
 Made with Jetpack Libraries &amp; Clean Architecture
 
 <b>What's Inside</b>
