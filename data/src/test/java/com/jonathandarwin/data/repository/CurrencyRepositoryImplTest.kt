@@ -61,7 +61,7 @@ class CurrencyRepositoryImplTest{
     fun `test convert`() {
         runBlocking {
             every {
-                runBlocking { service.convert(request.from, request.to, request.amount, request.apiKey) }
+                runBlocking { service.convert(request.from, request.to, request.amount, "haha") }
             } returns response
 
             val result = currencyRepository.convert(request)
