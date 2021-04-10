@@ -16,4 +16,5 @@ Made with Jetpack Libraries &amp; Clean Architecture
   <li>Room</li>
   <li>Unit Testing</li>
   <li>Clean Architecture</li>
+  <li>Continuous Integration (Circle CI)</li>
 </ul>
