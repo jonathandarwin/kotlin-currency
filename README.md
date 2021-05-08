@@ -18,3 +18,5 @@ Made with Jetpack Libraries &amp; Clean Architecture
   <li>Clean Architecture</li>
   <li>Continuous Integration (Circle CI)</li>
 </ul>
+
+![image](https://user-images.githubusercontent.com/48744669/117536661-903b8e00-b026-11eb-8003-5cd46d551d21.png)
