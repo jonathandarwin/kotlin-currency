@@ -10,6 +10,7 @@ import com.jonathandarwin.domain.dto.convert.ConvertResponse
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -36,7 +37,7 @@ class CurrencyRepositoryImplTest{
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        currencyRepository = CurrencyRepositoryImpl(service, database)
+        currencyRepository = CurrencyRepositoryImpl(service, database, Dispatchers.IO)
         `prepare req res`()
     }
 
