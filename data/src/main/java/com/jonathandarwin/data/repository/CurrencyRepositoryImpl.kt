@@ -10,6 +10,7 @@ import com.jonathandarwin.domain.dto.convert.ConvertResponse
 import com.jonathandarwin.domain.dto.currencies.CurrenciesItemResponse
 import com.jonathandarwin.domain.dto.currencies.CurrenciesResponse
 import com.jonathandarwin.domain.entity.CurrencyDTO
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
@@ -20,11 +21,12 @@ import javax.inject.Inject
  */ 
 class CurrencyRepositoryImpl @Inject constructor(
     private val remoteService: RemoteService,
-    private val database: AppDatabase
+    private val database: AppDatabase,
+    private val dispatcher: CoroutineDispatcher
 ) : CurrencyRepository {
 
     override suspend fun convert(request: ConvertRequest): ApiResponse<ConvertResponse> {
-        return withContext(Dispatchers.IO) {
+        return withContext(dispatcher) {
             val response = remoteService.convert(request.from, request.to, request.amount, RetrofitBuilder.apiKey)
             if(response.isSuccessful){
                 ApiResponse.Success(response.body()!!)
@@ -36,7 +38,7 @@ class CurrencyRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getCurrencies(): ApiResponse<CurrenciesResponse> {
-        return withContext(IO) {
+        return withContext(dispatcher) {
             val currencies = arrayListOf<CurrenciesItemResponse>()
             currencies.add(CurrenciesItemResponse("Indonesian Rupiah", "IDR"))
             currencies.add(CurrenciesItemResponse("United States Dollar", "USD"))
@@ -52,19 +54,19 @@ class CurrencyRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveConvertCurrency(currenyDTO: CurrencyDTO): Boolean {
-        return withContext(IO) {
+        return withContext(dispatcher) {
             database.currencyDAO.insert(currenyDTO) > 0
         }
     }
 
     override suspend fun getConvertCurrencyHistory(limit: Int): List<CurrencyDTO> {
-        return withContext(IO) {
+        return withContext(dispatcher) {
             database.currencyDAO.get()
         }
     }
 
     override suspend fun deleteAllHistory(): Boolean {
-        return withContext(IO) {
+        return withContext(dispatcher) {
             database.currencyDAO.deleteAll() > 0
         }
     }
