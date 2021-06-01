@@ -3,6 +3,7 @@ package com.jonathandarwin.currency.ui.history
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.jonathandarwin.currency.base.BaseAdapter
 import com.jonathandarwin.currency.databinding.ListConvertCurrencyHistoryItemBinding
 import com.jonathandarwin.currency.util.DateTimeUtil
 import com.jonathandarwin.currency.util.DateTimeUtil.ddMMMyyyyHHmm
@@ -11,29 +12,18 @@ import com.jonathandarwin.domain.model.ConvertCurrency
 /**
  * Created By : Jonathan Darwin on March 27, 2021
  */ 
-class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
+class HistoryAdapter: BaseAdapter<ConvertCurrency, ListConvertCurrencyHistoryItemBinding>() {
 
-    private val list = arrayListOf<ConvertCurrency>()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
+        BaseViewHolder(ListConvertCurrencyHistoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false).root)
 
-    inner class HistoryViewHolder(private val binding: ListConvertCurrencyHistoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ConvertCurrency) {
-            binding.data = item
-            binding.displayDateTime = DateTimeUtil.convertToDate(item.datetime).ddMMMyyyyHHmm()
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        super.onBindViewHolder(holder, position)
+        val binding = holder.getBinding()
+        binding?.let {
+            val item = data[position]
+            it.data = item
+            it.displayDateTime = DateTimeUtil.convertToDate(item.datetime).ddMMMyyyyHHmm()
         }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder =
-        HistoryViewHolder(ListConvertCurrencyHistoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
-    override fun getItemCount(): Int = list.size
-
-    override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        holder.bind(list[position])
-    }
-
-    fun updateData(newList: List<ConvertCurrency>) {
-        list.clear()
-        list.addAll(newList)
-        notifyDataSetChanged()
     }
 }
