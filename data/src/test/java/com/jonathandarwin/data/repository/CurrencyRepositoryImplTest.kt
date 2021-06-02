@@ -2,6 +2,7 @@ package com.jonathandarwin.data.repository
 
 import android.app.Service
 import com.jonathandarwin.data.database.AppDatabase
+import com.jonathandarwin.data.database.dao.CurrencyDAO
 import com.jonathandarwin.data.network.RemoteService
 import com.jonathandarwin.domain.base.ApiResponse
 import com.jonathandarwin.domain.dto.convert.ConvertItemResponse
@@ -29,7 +30,7 @@ class CurrencyRepositoryImplTest{
     lateinit var service: RemoteService
 
     @MockK
-    lateinit var database: AppDatabase
+    lateinit var currencyDao: CurrencyDAO
 
     lateinit var request: ConvertRequest
     lateinit var response: Response<ConvertResponse>
@@ -37,7 +38,7 @@ class CurrencyRepositoryImplTest{
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        currencyRepository = CurrencyRepositoryImpl(service, database, Dispatchers.IO)
+        currencyRepository = CurrencyRepositoryImpl(service, currencyDao, Dispatchers.IO)
         `prepare req res`()
     }
 
