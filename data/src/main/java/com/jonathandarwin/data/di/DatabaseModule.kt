@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.di
+package com.jonathandarwin.data.di
 
 import android.content.Context
 import com.jonathandarwin.data.database.AppDatabase
@@ -10,8 +10,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 /**
- * Created By : Jonathan Darwin on March 27, 2021
- */ 
+ * Created By : Jonathan Darwin on June 02, 2021
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {

@@ -45,6 +45,7 @@ dependencies {
 
     // Hilt
     implementation rootProject.ext.hilt
+    implementation rootProject.ext.hilt_viewmodel
     kapt rootProject.ext.hilt_android_compiler
     kapt rootProject.ext.hilt_compiler
 
@@ -56,7 +57,7 @@ dependencies {
     testImplementation rootProject.ext.mockk
     testImplementation rootProject.ext.junit
     androidTestImplementation rootProject.ext.hilt_test
-    kapt rootProject.ext.hilt_test_compiler
+    kaptAndroidTest rootProject.ext.hilt_test_compiler
 
     implementation project(':domain')
 }

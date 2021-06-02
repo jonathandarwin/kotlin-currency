@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.di
+package com.jonathandarwin.data.di
 
 import dagger.Module
 import dagger.Provides

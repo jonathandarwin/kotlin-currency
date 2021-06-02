@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.di
+package com.jonathandarwin.data.di
 
 import com.jonathandarwin.data.repository.CurrencyRepositoryImpl
 import com.jonathandarwin.domain.abstraction.repository.CurrencyRepository

@@ -66,7 +66,7 @@ dependencies {
     androidTestImplementation rootProject.ext.android_junit
     androidTestImplementation rootProject.ext.espresso
     androidTestImplementation rootProject.ext.hilt_test
-    kapt rootProject.ext.hilt_test_compiler
+    kaptAndroidTest rootProject.ext.hilt_test_compiler
     debugImplementation rootProject.ext.fragment_test
 
     implementation project(":domain")

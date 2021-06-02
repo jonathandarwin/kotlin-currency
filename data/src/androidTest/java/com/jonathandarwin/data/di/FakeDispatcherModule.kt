@@ -1,9 +1,9 @@
-package com.jonathandarwin.data.module
+package com.jonathandarwin.data.di
 
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
+import dagger.hilt.testing.TestInstallIn
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
@@ -11,7 +11,10 @@ import kotlinx.coroutines.Dispatchers
  * Created By : Jonathan Darwin on June 02, 2021
  */
 @Module
-@InstallIn(ApplicationComponent::class)
+@TestInstallIn(
+    components = [SingletonComponent::class],
+    replaces = [CoroutineModule::class]
+)
 object FakeDispatcherModule {
     @Provides
     fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO

@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.di
+package com.jonathandarwin.domain.di
 
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
 import com.jonathandarwin.domain.usecase.CurrencyUseCaseImpl
