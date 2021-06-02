@@ -55,6 +55,8 @@ dependencies {
 
     testImplementation rootProject.ext.mockk
     testImplementation rootProject.ext.junit
+    androidTestImplementation rootProject.ext.hilt_test
+    kapt rootProject.ext.hilt_test_compiler
 
     implementation project(':domain')
 }

@@ -2,6 +2,7 @@ package com.jonathandarwin.currency.di
 
 import android.content.Context
 import com.jonathandarwin.data.database.AppDatabase
+import com.jonathandarwin.data.database.dao.CurrencyDAO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +16,5 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
     @Provides
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase = AppDatabase.getInstance(context)
+    fun provideCurrencyDao(@ApplicationContext context: Context): CurrencyDAO = AppDatabase.getInstance(context).currencyDAO
 }

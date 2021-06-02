@@ -18,7 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.jonathandarwin.currency.util.CustomTestRunner"
     }
 
     buildTypes {
@@ -65,6 +65,9 @@ dependencies {
     testImplementation rootProject.ext.junit
     androidTestImplementation rootProject.ext.android_junit
     androidTestImplementation rootProject.ext.espresso
+    androidTestImplementation rootProject.ext.hilt_test
+    kapt rootProject.ext.hilt_test_compiler
+    debugImplementation rootProject.ext.fragment_test
 
     implementation project(":domain")
     implementation project(":data")

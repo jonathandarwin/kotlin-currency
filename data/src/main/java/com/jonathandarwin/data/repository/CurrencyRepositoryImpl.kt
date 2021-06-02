@@ -1,6 +1,7 @@
 package com.jonathandarwin.data.repository
 
 import com.jonathandarwin.data.database.AppDatabase
+import com.jonathandarwin.data.database.dao.CurrencyDAO
 import com.jonathandarwin.data.network.RemoteService
 import com.jonathandarwin.data.network.RetrofitBuilder
 import com.jonathandarwin.domain.abstraction.repository.CurrencyRepository
@@ -21,7 +22,7 @@ import javax.inject.Inject
  */ 
 class CurrencyRepositoryImpl @Inject constructor(
     private val remoteService: RemoteService,
-    private val database: AppDatabase,
+    private val currencyDAO: CurrencyDAO,
     private val dispatcher: CoroutineDispatcher
 ) : CurrencyRepository {
 
@@ -55,19 +56,19 @@ class CurrencyRepositoryImpl @Inject constructor(
 
     override suspend fun saveConvertCurrency(currenyDTO: CurrencyDTO): Boolean {
         return withContext(dispatcher) {
-            database.currencyDAO.insert(currenyDTO) > 0
+            currencyDAO.insert(currenyDTO) > 0
         }
     }
 
     override suspend fun getConvertCurrencyHistory(limit: Int): List<CurrencyDTO> {
         return withContext(dispatcher) {
-            database.currencyDAO.get()
+            currencyDAO.get()
         }
     }
 
     override suspend fun deleteAllHistory(): Boolean {
         return withContext(dispatcher) {
-            database.currencyDAO.deleteAll() > 0
+            currencyDAO.deleteAll() > 0
         }
     }
 }

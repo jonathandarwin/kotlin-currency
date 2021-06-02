@@ -52,4 +52,6 @@ dependencies {
 
     testImplementation rootProject.ext.junit
     testImplementation rootProject.ext.mockk
+    androidTestImplementation rootProject.ext.hilt_test
+    kapt rootProject.ext.hilt_test_compiler
 }
