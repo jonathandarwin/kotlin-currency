@@ -1,7 +1,7 @@
 package com.jonathandarwin.currency.ui.home
 
-//import androidx.fragment.app.testing.launchFragmentInContainer
 //import androidx.test.ext.junit.runners.AndroidJUnit4
+//import com.jonathandarwin.currency.util.launchFragmentInHiltContainer
 //import dagger.hilt.android.testing.HiltAndroidRule
 //import dagger.hilt.android.testing.HiltAndroidTest
 //import org.junit.Before
@@ -12,8 +12,8 @@ package com.jonathandarwin.currency.ui.home
 ///**
 // * Created By : Jonathan Darwin on June 02, 2021
 // */
-//@HiltAndroidTest
 //@RunWith(AndroidJUnit4::class)
+//@HiltAndroidTest
 //class HomeFragmentTest {
 //
 //    @get:Rule
@@ -26,6 +26,6 @@ package com.jonathandarwin.currency.ui.home
 //
 //    @Test
 //    fun testLaunchFragment() {
-//        val scenario = launchFragmentInContainer<HomeFragment>()
+//        launchFragmentInHiltContainer<HomeFragment>()
 //    }
 //}

@@ -72,3 +72,7 @@ dependencies {
     implementation project(":domain")
     implementation project(":data")
 }
+
+kapt {
+    correctErrorTypes true
+}
