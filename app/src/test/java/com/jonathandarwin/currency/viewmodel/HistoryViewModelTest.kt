@@ -71,4 +71,20 @@ class HistoryViewModelTest {
 
         assertThat(viewModel.historyList, `is`(data))
     }
+
+    @Test
+    fun `when delete history, then it should update the state`() {
+        coEvery { currencyUseCase.deleteAllHistory() } returns true
+
+        viewModel.loading.observeForever(loadingObserver)
+        viewModel.state.observeForever(stateObserver)
+
+        viewModel.deleteAllHistory()
+
+        verifySequence {
+            loadingObserver.onChanged(true)
+            loadingObserver.onChanged(false)
+            stateObserver.onChanged(HistoryViewModelState.DELETE_ALL_HISTORY)
+        }
+    }
 }
