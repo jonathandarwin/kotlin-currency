@@ -64,6 +64,8 @@ dependencies {
 
     testImplementation rootProject.ext.junit
     testImplementation rootProject.ext.testing_core
+    testImplementation rootProject.ext.mockk
+    testImplementation rootProject.ext.coroutine_test
     androidTestImplementation rootProject.ext.android_junit
     androidTestImplementation rootProject.ext.espresso
     androidTestImplementation rootProject.ext.hilt_test

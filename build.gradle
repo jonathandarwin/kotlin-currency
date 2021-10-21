@@ -69,6 +69,7 @@ ext {
     hilt_test_compiler          = 'com.google.dagger:hilt-android-compiler:2.36'
     fragment_test               = 'androidx.fragment:fragment-testing:1.3.4'
     testing_core                = 'androidx.arch.core:core-testing:2.1.0'
+    coroutine_test              = 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9'
 }
 
 task clean(type: Delete) {
