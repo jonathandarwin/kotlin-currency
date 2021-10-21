@@ -22,6 +22,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.lang.Exception
 
 /**
  * Created By : Jonathan Darwin on October 21, 2021
@@ -41,6 +42,9 @@ class HomeViewModelTest {
     @MockK
     private lateinit var loadingObserver: Observer<Boolean>
 
+    @MockK
+    private lateinit var errorObserver: Observer<Throwable>
+
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
@@ -50,6 +54,7 @@ class HomeViewModelTest {
 
         every { stateObserver.onChanged(any()) }.just(Runs)
         every { loadingObserver.onChanged(any()) }.just(Runs)
+        every { errorObserver.onChanged(any()) }.just(Runs)
     }
 
     @After
@@ -58,7 +63,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `when get currency, if success, it should emit all the available currencyf`() {
+    fun `when get currency, if success, it should emit all the available currency`() {
         val data = mutableListOf<Currency>()
         data.add(Currency("Rupiah", "IDR"))
         data.add(Currency("Singapore Dollar", "SGD"))
@@ -80,5 +85,21 @@ class HomeViewModelTest {
         }
 
         MatcherAssert.assertThat(viewModel.currencies, `is`(mappedData))
+    }
+
+    @Test
+    fun `when get currency, if error, it should emit error message`() {
+        val error = Exception("Network Error")
+        coEvery { currencyUseCase.getCurrencies() } throws error
+
+        viewModel.loading.observeForever(loadingObserver)
+        viewModel.error.observeForever(errorObserver)
+
+        viewModel.getCurrency()
+
+        verifySequence {
+            loadingObserver.onChanged(false)
+            errorObserver.onChanged(error)
+        }
     }
 }
