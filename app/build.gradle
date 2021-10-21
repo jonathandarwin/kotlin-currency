@@ -63,6 +63,7 @@ dependencies {
     kapt rootProject.ext.room_compiler
 
     testImplementation rootProject.ext.junit
+    testImplementation rootProject.ext.testing_core
     androidTestImplementation rootProject.ext.android_junit
     androidTestImplementation rootProject.ext.espresso
     androidTestImplementation rootProject.ext.hilt_test
