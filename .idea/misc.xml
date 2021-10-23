@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Projects/Hacktober 2021/android-mas-jo/kotlin-currency/app/src/main/res/layout/home_fragment.xml" value="0.2518518518518518" />
+        <entry key="..\:/Projects/Hacktober 2021/android-mas-jo/kotlin-currency/app/src/main/res/drawable/bg_edit_text.xml" value="0.35" />
+        <entry key="..\:/Projects/Hacktober 2021/android-mas-jo/kotlin-currency/app/src/main/res/layout/history_fragment.xml" value="0.346875" />
+        <entry key="..\:/Projects/Hacktober 2021/android-mas-jo/kotlin-currency/app/src/main/res/layout/home_fragment.xml" value="0.4" />
+        <entry key="..\:/Projects/Hacktober 2021/android-mas-jo/kotlin-currency/app/src/main/res/layout/list_bottom_sheet_item.xml" value="0.346875" />
+        <entry key="..\:/Projects/Hacktober 2021/android-mas-jo/kotlin-currency/app/src/main/res/layout/list_convert_currency_history_item.xml" value="0.346875" />
       </map>
     </option>
   </component>
