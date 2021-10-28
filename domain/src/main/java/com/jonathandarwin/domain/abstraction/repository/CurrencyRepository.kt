@@ -1,5 +1,6 @@
 package com.jonathandarwin.domain.abstraction.repository
 
+import android.content.Context
 import com.jonathandarwin.domain.base.ApiResponse
 import com.jonathandarwin.domain.dto.convert.ConvertRequest
 import com.jonathandarwin.domain.dto.convert.ConvertResponse

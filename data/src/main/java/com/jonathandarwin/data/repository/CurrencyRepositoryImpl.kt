@@ -1,6 +1,5 @@
 package com.jonathandarwin.data.repository
 
-import com.jonathandarwin.data.database.AppDatabase
 import com.jonathandarwin.data.database.dao.CurrencyDAO
 import com.jonathandarwin.data.network.RemoteService
 import com.jonathandarwin.data.network.RetrofitBuilder
@@ -12,8 +11,6 @@ import com.jonathandarwin.domain.dto.currencies.CurrenciesItemResponse
 import com.jonathandarwin.domain.dto.currencies.CurrenciesResponse
 import com.jonathandarwin.domain.entity.CurrencyDTO
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
