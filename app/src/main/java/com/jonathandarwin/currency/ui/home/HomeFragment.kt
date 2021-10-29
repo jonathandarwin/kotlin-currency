@@ -47,7 +47,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
 
         viewModel.getCurrency()
         viewModel.getPreviewHistory()
-        checkCurrentTheme()
+        setCurrentTheme()
     }
 
     override fun initListener() {
@@ -56,23 +56,26 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
         binding.tvTo.setOnClickListener(this)
         binding.btnConvert.setOnClickListener(this)
         binding.tvSeeAll.setOnClickListener(this)
-        binding.switchTheme.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.switchTheme.setOnCheckedChangeListener { _, isChecked ->
             switchTheme(isChecked)
         }
     }
 
-    private fun switchTheme(isDarkTheme:Boolean){
-        if(isDarkTheme){
+    private fun switchTheme(isDarkTheme: Boolean) {
+        if (isDarkTheme) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             requireContext().setTheme(R.style.Theme_CurrencyDark)
-        }else{
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             requireContext().setTheme(R.style.Theme_Currency)
         }
-        ThemeUtil.switchTheme(requireContext(),isDarkTheme)
+        ThemeUtil.saveTheme(
+            requireContext(),
+            if (isDarkTheme) ThemeUtil.DARK_THEME else ThemeUtil.LIGHT_THEME
+        )
     }
 
-    private fun checkCurrentTheme() {
+    private fun setCurrentTheme() {
         binding.switchTheme.isChecked = this.resources.configuration.uiMode and
                 Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }
@@ -129,7 +132,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
                 }
                 binding.btnConvert -> {
                     val isLoading = viewModel.loading.value ?: false
-                    if (!isLoading) {
+                    if(!isLoading) {
                         if (!binding.etAmount.text.isNullOrEmpty()) {
                             hideSoftKeyboard(requireActivity())
                             binding.rateGroup.visibility = View.INVISIBLE

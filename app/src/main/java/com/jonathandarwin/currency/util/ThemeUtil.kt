@@ -4,30 +4,23 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 
 object ThemeUtil {
-    val DARK_THEME = "DARK"
-    val LIGHT_THEME = "LIGHT"
-    val THEME_KEY = "SELECTED_THEME"
-    val SP = "SP"
+    const val DARK_THEME = "DARK"
+    const val LIGHT_THEME = "LIGHT"
+    const val THEME_KEY = "SELECTED_THEME"
+    const val SP = "SP"
 
-    fun saveTheme(ctx: Context, theme:String) {
-        val sp = ctx.getSharedPreferences(SP, Context.MODE_PRIVATE)
-        val ed = sp.edit()
-        ed.putString(THEME_KEY,theme)
-        ed.apply()
+    fun saveTheme(ctx: Context, theme: String) {
+        val sharedPreference = ctx.getSharedPreferences(SP, Context.MODE_PRIVATE)
+        val edit = sharedPreference.edit()
+        edit.putString(THEME_KEY, theme)
+        edit.apply()
 
     }
 
     fun getTheme(ctx: Context): String {
-        val sp = ctx.getSharedPreferences(SP, Context.MODE_PRIVATE)
-        val theme = sp.getString(THEME_KEY,"")
-        return theme ?: ""
-    }
-    fun switchTheme(ctx:Context,toDarkMode: Boolean) {
-        if (toDarkMode) {
-            saveTheme(ctx, DARK_THEME)
-        } else {
-            saveTheme(ctx, LIGHT_THEME)
-        }
+        val sharedPreference = ctx.getSharedPreferences(SP, Context.MODE_PRIVATE)
 
+        val theme = sharedPreference.getString(THEME_KEY, "")
+        return theme ?: ""
     }
 }
