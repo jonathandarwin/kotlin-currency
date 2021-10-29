@@ -14,12 +14,10 @@ object ThemeUtil {
         val edit = sharedPreference.edit()
         edit.putString(THEME_KEY, theme)
         edit.apply()
-
     }
 
     fun getTheme(ctx: Context): String {
         val sharedPreference = ctx.getSharedPreferences(SP, Context.MODE_PRIVATE)
-
         val theme = sharedPreference.getString(THEME_KEY, "")
         return theme ?: ""
     }
