@@ -161,17 +161,15 @@
                     tools:text="14000" />
 
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnConvert"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_button"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
                     android:text="@string/convert"
                     android:textColor="@color/white"
+                    app:cornerRadius="12dp"
+                    android:padding="12dp"
                     app:layout_constraintLeft_toLeftOf="@id/etAmount"
                     app:layout_constraintRight_toRightOf="@id/etResult"
                     app:layout_constraintTop_toBottomOf="@id/tvRate" />
