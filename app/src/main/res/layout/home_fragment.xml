@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="?colorBackground"
         >
 
         <TextView
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:layout_margin="16dp"
-            android:textColor="@color/black"
+            android:textColor="?titleColor"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -27,24 +27,31 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_dark_mode_24"
+            app:layout_constraintEnd_toEndOf="@+id/cvCalculator"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cvCalculator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginHorizontal="16dp"
+
             app:cardCornerRadius="12dp"
             app:cardElevation="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            >
+            app:layout_constraintTop_toBottomOf="@id/switchTheme">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp"
-                android:background="@color/cardBackground"
-                >
+                android:background="?cardBackgroundCustom"
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/tvFromLabel"
@@ -52,33 +59,30 @@
                     android:layout_height="wrap_content"
                     android:text="@string/from"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvFrom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="USD"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
                     android:layout_marginTop="4dp"
                     android:drawableEnd="@drawable/ic_down"
+                    android:textColor="?titleColor"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/tvFromLabel"
                     app:layout_constraintTop_toBottomOf="@id/tvFromLabel"
-                    />
+                    tools:text="USD" />
 
                 <ImageView
                     android:id="@+id/icRight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintTop_toTopOf="@id/tvFromLabel"
                     app:layout_constraintBottom_toBottomOf="@id/tvFrom"
                     app:layout_constraintLeft_toRightOf="@id/tvFrom"
                     app:layout_constraintRight_toLeftOf="@id/tvTo"
-                    />
+                    app:layout_constraintTop_toTopOf="@id/tvFromLabel" />
 
                 <TextView
                     android:id="@+id/tvToLabel"
@@ -86,99 +90,111 @@
                     android:layout_height="wrap_content"
                     android:text="@string/to"
                     app:layout_constraintLeft_toLeftOf="@id/tvTo"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvTo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="USD"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
                     android:layout_marginTop="4dp"
                     android:drawableEnd="@drawable/ic_down"
+                    android:textColor="?titleColor"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvToLabel"
-                    />
+                    tools:text="USD" />
 
-                <EditText
-                    android:id="@+id/etAmount"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilAmount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:hint="@string/amount"
-                    android:background="@drawable/bg_edit_text"
-                    android:padding="12dp"
-                    android:inputType="number"
+                    app:hintEnabled="false"
+                    android:layout_marginTop="37dp"
                     android:layout_marginEnd="8dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
                     app:layout_constraintLeft_toLeftOf="@id/tvFromLabel"
-                    app:layout_constraintRight_toLeftOf="@id/etResult"
+                    app:layout_constraintRight_toLeftOf="@id/tilResult"
                     app:layout_constraintTop_toBottomOf="@id/tvFrom"
-                    />
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    <EditText
+                        android:id="@+id/etAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:padding="12dp"
+                        android:hint="@string/amount"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/etResult"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilResult"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:hint="@string/result"
-                    android:background="@drawable/bg_edit_text"
-                    android:padding="12dp"
-                    android:inputType="number"
-                    android:enabled="false"
                     android:layout_marginStart="8dp"
-                    app:layout_constraintLeft_toRightOf="@id/etAmount"
+                    android:layout_marginTop="32dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:layout_constraintLeft_toRightOf="@id/tilAmount"
                     app:layout_constraintRight_toRightOf="@id/tvTo"
                     app:layout_constraintTop_toBottomOf="@id/tvFrom"
-                    />
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    >
+                    <EditText
+                        android:id="@+id/etResult"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/result"
+                        android:enabled="false"
+                        android:inputType="number"
+                        android:padding="12dp"
+                       />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/rateGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="tvRateLabel, tvRate"
                     android:visibility="invisible"
-                    />
+                    app:constraint_referenced_ids="tvRateLabel, tvRate" />
 
                 <TextView
                     android:id="@+id/tvRateLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/rate"
                     android:layout_marginEnd="4dp"
-                    app:layout_constraintRight_toLeftOf="@id/tvRate"
-                    app:layout_constraintTop_toTopOf="@id/tvRate"
+                    android:text="@string/rate"
                     app:layout_constraintBottom_toBottomOf="@id/tvRate"
-                    />
+                    app:layout_constraintRight_toLeftOf="@id/tvRate"
+                    app:layout_constraintTop_toTopOf="@id/tvRate" />
 
                 <TextView
                     android:id="@+id/tvRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    tools:text="14000"
-                    app:layout_constraintRight_toRightOf="@id/etResult"
-                    app:layout_constraintTop_toBottomOf="@id/etResult"
-                    />
+                    app:layout_constraintRight_toRightOf="@id/tilResult"
+                    app:layout_constraintTop_toBottomOf="@id/tilResult"
+                    tools:text="14000" />
 
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnConvert"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/convert"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_button"
+                    android:text="@string/convert"
                     android:textColor="@color/white"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    app:layout_constraintTop_toBottomOf="@id/tvRate"
-                    app:layout_constraintLeft_toLeftOf="@id/etAmount"
-                    app:layout_constraintRight_toRightOf="@id/etResult"
-                    />
+                    app:cornerRadius="12dp"
+                    android:padding="12dp"
+                    app:layout_constraintLeft_toLeftOf="@id/tilAmount"
+                    app:layout_constraintRight_toRightOf="@id/tilResult"
+                    app:layout_constraintTop_toBottomOf="@id/tvRate" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -204,7 +220,7 @@
             android:text="@string/history"
             android:layout_marginTop="24dp"
             android:layout_marginStart="16dp"
-            android:textColor="@color/black"
+            android:textColor="?titleColor"
             android:textStyle="bold"
             android:textSize="20sp"
             app:layout_constraintRight_toLeftOf="@id/tvSeeAll"

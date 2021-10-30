@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             tools:text="Title"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="?titleColor"
             android:textSize="18sp"
             android:layout_marginTop="24dp"
             app:layout_constraintLeft_toLeftOf="parent"

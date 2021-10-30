@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
-        app:cardElevation="8dp"
+        app:cardElevation="4dp"
         android:layout_margin="8dp"
         android:clickable="true"
         android:focusable="true"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
-            android:background="@color/white"
+            android:background="?cardBackgroundCustom"
             >
 
             <TextView
@@ -50,7 +50,7 @@
                 android:text="@{data.from}"
                 tools:text="IDR"
                 android:textSize="16dp"
-                android:textColor="@color/black"
+                android:textColor="?titleColor"
                 app:layout_constraintLeft_toLeftOf="@id/tvDateTime"
                 app:layout_constraintTop_toBottomOf="@id/tvDateTime"
                 />
@@ -75,7 +75,7 @@
                 android:text="@{data.to}"
                 tools:text="USD"
                 android:textSize="16dp"
-                android:textColor="@color/black"
+                android:textColor="?titleColor"
                 app:layout_constraintTop_toTopOf="@id/icRight"
                 app:layout_constraintBottom_toBottomOf="@id/icRight"
                 app:layout_constraintLeft_toRightOf="@id/icRight"
@@ -90,7 +90,7 @@
                 tools:text="15000"
                 android:textStyle="bold"
                 android:textSize="20dp"
-                android:textColor="@color/black"
+                android:textColor="?titleColor"
                 app:layout_constraintLeft_toLeftOf="@id/tvDateTime"
                 app:layout_constraintTop_toBottomOf="@id/tvFrom"
                 />
@@ -116,7 +116,7 @@
                 tools:text="3.5"
                 android:textStyle="bold"
                 android:textSize="20dp"
-                android:textColor="@color/black"
+                android:textColor="?titleColor"
                 app:layout_constraintTop_toTopOf="@id/icRight2"
                 app:layout_constraintBottom_toBottomOf="@id/icRight2"
                 app:layout_constraintLeft_toRightOf="@id/icRight2"

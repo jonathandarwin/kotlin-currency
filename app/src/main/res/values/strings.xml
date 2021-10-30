@@ -10,4 +10,5 @@
     <string name="history">History</string>
     <string name="see_all">See All</string>
     <string name="delete_all_history">Delete All History</string>
+    <string name="content_desc_back">Back to previous page</string>
 </resources>
