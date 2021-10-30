@@ -20,7 +20,11 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_historyFragment"
-            app:destination="@id/historyFragment" />
+            app:destination="@id/historyFragment"
+            app:enterAnim="@anim/slide_top_to_bottom"
+            app:exitAnim="@anim/stay"
+            app:popEnterAnim="@anim/stay"
+            app:popExitAnim="@anim/slide_bottom_to_top"/>
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
