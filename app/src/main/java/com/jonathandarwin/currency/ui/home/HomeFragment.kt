@@ -2,6 +2,8 @@ package com.jonathandarwin.currency.ui.home
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
@@ -21,6 +23,9 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.OnClickListener {
+
+    val MIN_SWIPE_DISTANCE_Y = 100
+    val MAX_SWIPE_DISTANCE_Y = 1000
 
     private val viewModel: HomeViewModel by viewModels()
     private val historyAdapter: HistoryAdapter by lazy { HistoryAdapter() }
@@ -59,20 +64,54 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
         binding.switchTheme.setOnCheckedChangeListener { _, isChecked ->
             switchTheme(isChecked)
         }
+        binding.viewDetector.setOnTouchListener { v, event ->
+            setGestureDetector(event)
+            if(event.action == MotionEvent.ACTION_UP){
+                v.performClick()
+            }
+            true
+        }
     }
 
     private fun switchTheme(isDarkTheme: Boolean) {
-        if (isDarkTheme) {
+        if(isDarkTheme) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             requireContext().setTheme(R.style.Theme_CurrencyDark)
-        } else {
+        }else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             requireContext().setTheme(R.style.Theme_Currency)
         }
         ThemeUtil.saveTheme(
             requireContext(),
-            if (isDarkTheme) ThemeUtil.DARK_THEME else ThemeUtil.LIGHT_THEME
+            if(isDarkTheme) ThemeUtil.DARK_THEME else ThemeUtil.LIGHT_THEME
         )
+    }
+
+    private fun setGestureDetector(event:MotionEvent){
+        val gestureDetector =
+            GestureDetector(activity, object : GestureDetector.SimpleOnGestureListener() {
+                override fun onFling(
+                    e1: MotionEvent?,
+                    e2: MotionEvent?,
+                    velocityX: Float,
+                    velocityY: Float
+                ): Boolean {
+                    if(e1 != null && e2 != null){
+                        val deltaY = e1.y - e2.y
+                        val deltaYAbs = Math.abs(deltaY)
+                        if((deltaYAbs >= MIN_SWIPE_DISTANCE_Y) && (deltaYAbs <= MAX_SWIPE_DISTANCE_Y)) {
+                            if (deltaY > 0) {
+                                val direction =
+                                    HomeFragmentDirections.actionHomeFragmentToHistoryFragment()
+                                navigate(direction)
+                            }
+                        }
+                    }
+
+                    return super.onFling(e1, e2, velocityX, velocityY)
+                }
+            })
+        gestureDetector.onTouchEvent(event)
     }
 
     private fun setCurrentTheme() {
@@ -133,11 +172,11 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
                 binding.btnConvert -> {
                     val isLoading = viewModel.loading.value ?: false
                     if(!isLoading) {
-                        if (!binding.etAmount.text.isNullOrEmpty()) {
+                        if(!binding.etAmount.text.isNullOrEmpty()) {
                             hideSoftKeyboard(requireActivity())
                             binding.rateGroup.visibility = View.INVISIBLE
                             viewModel.convert(binding.etAmount.text.toString())
-                        } else {
+                        }else {
                             showErrorDialog("You haven't input the amount")
                         }
                     }
