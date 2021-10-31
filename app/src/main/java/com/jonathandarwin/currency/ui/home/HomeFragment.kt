@@ -24,8 +24,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.OnClickListener {
 
-    val MIN_SWIPE_DISTANCE_Y = 100
-    val MAX_SWIPE_DISTANCE_Y = 1000
+    companion object{
+        private const val MIN_SWIPE_DISTANCE_Y = 100
+        private const val MAX_SWIPE_DISTANCE_Y = 1000
+    }
 
     private val viewModel: HomeViewModel by viewModels()
     private val historyAdapter: HistoryAdapter by lazy { HistoryAdapter() }
@@ -87,7 +89,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
         )
     }
 
-    private fun setGestureDetector(event:MotionEvent){
+    private fun setGestureDetector(event: MotionEvent){
         val gestureDetector =
             GestureDetector(activity, object : GestureDetector.SimpleOnGestureListener() {
                 override fun onFling(
