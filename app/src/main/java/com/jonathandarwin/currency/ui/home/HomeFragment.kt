@@ -1,7 +1,9 @@
 package com.jonathandarwin.currency.ui.home
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -31,6 +33,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
 
     private val viewModel: HomeViewModel by viewModels()
     private val historyAdapter: HistoryAdapter by lazy { HistoryAdapter() }
+    private lateinit var gestureDetector: GestureDetector
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,8 +58,10 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
         viewModel.getCurrency()
         viewModel.getPreviewHistory()
         setCurrentTheme()
+        implementGestureDetector()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun initListener() {
         super.initListener()
         binding.tvFrom.setOnClickListener(this)
@@ -66,11 +71,9 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
         binding.switchTheme.setOnCheckedChangeListener { _, isChecked ->
             switchTheme(isChecked)
         }
-        binding.viewDetector.setOnTouchListener { v, event ->
-            setGestureDetector(event)
-            if(event.action == MotionEvent.ACTION_UP){
-                v.performClick()
-            }
+
+        binding.viewDetector.setOnTouchListener { _, event ->
+            gestureDetector.onTouchEvent(event)
             true
         }
     }
@@ -89,8 +92,8 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
         )
     }
 
-    private fun setGestureDetector(event: MotionEvent){
-        val gestureDetector =
+    private fun implementGestureDetector(){
+        gestureDetector =
             GestureDetector(activity, object : GestureDetector.SimpleOnGestureListener() {
                 override fun onFling(
                     e1: MotionEvent?,
@@ -102,7 +105,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
                         val deltaY = e1.y - e2.y
                         val deltaYAbs = Math.abs(deltaY)
                         if((deltaYAbs >= MIN_SWIPE_DISTANCE_Y) && (deltaYAbs <= MAX_SWIPE_DISTANCE_Y)) {
-                            if (deltaY > 0) {
+                            if(deltaY > 0) {
                                 val direction =
                                     HomeFragmentDirections.actionHomeFragmentToHistoryFragment()
                                 navigate(direction)
@@ -110,10 +113,9 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
                         }
                     }
 
-                    return super.onFling(e1, e2, velocityX, velocityY)
+                    return true
                 }
             })
-        gestureDetector.onTouchEvent(event)
     }
 
     private fun setCurrentTheme() {
