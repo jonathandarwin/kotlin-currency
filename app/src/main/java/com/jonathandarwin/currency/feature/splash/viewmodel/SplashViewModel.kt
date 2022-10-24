@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.ui.splash
+package com.jonathandarwin.currency.feature.splash.viewmodel
 
 import com.jonathandarwin.currency.base.BaseViewModel
 

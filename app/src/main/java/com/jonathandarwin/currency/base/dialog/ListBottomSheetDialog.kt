@@ -28,7 +28,7 @@ class ListBottomSheetDialog {
         return this
     }
 
-    fun setData(list: ArrayList<ListBottomSheet>): ListBottomSheetDialog {
+    fun setData(list: List<ListBottomSheet>): ListBottomSheetDialog {
         this.list.clear()
         this.list.addAll(list)
         return this

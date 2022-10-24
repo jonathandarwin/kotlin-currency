@@ -3,10 +3,8 @@ package com.jonathandarwin.currency.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.jonathandarwin.currency.base.dialog.ListBottomSheet
-import com.jonathandarwin.currency.ui.history.HistoryViewModel
-import com.jonathandarwin.currency.ui.history.HistoryViewModelState
-import com.jonathandarwin.currency.ui.home.HomeViewModel
-import com.jonathandarwin.currency.ui.home.HomeViewModelState
+import com.jonathandarwin.currency.feature.home.viewmodel.HomeViewModel
+import com.jonathandarwin.currency.feature.home.model.HomeViewModelState
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
 import com.jonathandarwin.domain.model.Currency
 import io.mockk.*
@@ -15,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert
 import org.junit.After

@@ -1,8 +1,7 @@
-package com.jonathandarwin.currency.ui.history
+package com.jonathandarwin.currency.feature.history.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.jonathandarwin.currency.base.BaseAdapter
 import com.jonathandarwin.currency.databinding.ListConvertCurrencyHistoryItemBinding
 import com.jonathandarwin.currency.util.DateTimeUtil

@@ -1,20 +1,27 @@
-package com.jonathandarwin.currency.ui.home
+package com.jonathandarwin.currency.feature.home.fragment
 
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.button.MaterialButton
 import com.jonathandarwin.currency.R
 import com.jonathandarwin.currency.base.BaseFragment
 import com.jonathandarwin.currency.base.dialog.ListBottomSheetDialog
+import com.jonathandarwin.currency.base.model.NetworkResult
 import com.jonathandarwin.currency.databinding.HomeFragmentBinding
-import com.jonathandarwin.currency.ui.history.HistoryAdapter
+import com.jonathandarwin.currency.feature.history.adapter.HistoryAdapter
+import com.jonathandarwin.currency.feature.history.fragment.HistoryFragment
+import com.jonathandarwin.currency.feature.home.model.ConversionResultUiModel
+import com.jonathandarwin.currency.feature.home.viewmodel.HomeViewModel
+import com.jonathandarwin.currency.feature.home.model.action.HomeUiAction
 import com.jonathandarwin.currency.util.ThemeUtil
+import com.jonathandarwin.domain.model.ConvertCurrency
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 /**
  * Created By : Jonathan Darwin on March 27, 2021
@@ -31,23 +38,21 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
     }
 
     private fun init() {
-        binding.tvFrom.text = viewModel.from
-        binding.tvTo.text = viewModel.to
-
-        binding.etAmount.setText(viewModel.convertResult)
-        binding.etResult.setText(viewModel.convertResult)
-        binding.tvRate.text = viewModel.rate
-
-        binding.rateGroup.visibility = if (viewModel.rate != "") View.VISIBLE else View.INVISIBLE
-
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = historyAdapter
         }
 
-        viewModel.getCurrency()
-        viewModel.getPreviewHistory()
         setCurrentTheme()
+
+        setFragmentResultListener(HistoryFragment.HISTORY_FRAGMENT_REQUEST_KEY) { requestKey, bundle ->
+            val isHistoryAllDeleted = bundle[HistoryFragment.EXTRA_HISTORY_ALL_DELETED] as Boolean
+            if(isHistoryAllDeleted) viewModel.submitAction(HomeUiAction.LoadHistory)
+        }
+
+//        observeArgument<Boolean>(HistoryFragment.HISTORY_ALL_DELETED) { isAllDeleted ->
+//            if(isAllDeleted) viewModel.submitAction(HomeUiAction.LoadHistory)
+//        }
     }
 
     override fun initListener() {
@@ -83,24 +88,42 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
     override fun initObserver() {
         super.initObserver()
 
-        viewModel.state.observe(this, Observer {
-            when (it) {
-                HomeViewModelState.SUCCESS_GET_CURRENCY -> {
-
-                }
-                HomeViewModelState.SUCCESS_CONVERT -> {
-                    binding.etResult.setText(viewModel.convertResult)
-                    binding.tvRate.text = viewModel.rate
-
-                    binding.rateGroup.visibility = View.VISIBLE
-
-                    viewModel.getPreviewHistory()
-                }
-                HomeViewModelState.GET_HISTORY -> {
-                    historyAdapter.updateData(viewModel.history)
-                }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.state.collectLatest {
+                renderForm(it.from, it.to)
+                renderConversionResult(it.conversionResult)
+                renderHistory(it.histories)
             }
-        })
+        }
+    }
+
+    private fun renderForm(from: String, to: String) {
+        binding.tvFrom.text = from
+        binding.tvTo.text = to
+    }
+
+    private fun renderConversionResult(conversionResult: ConversionResultUiModel) {
+        when(val state = conversionResult.state) {
+            is NetworkResult.Loading -> {
+                binding.loading.visibility = View.VISIBLE
+            }
+            is NetworkResult.Success -> {
+                binding.loading.visibility = View.GONE
+
+                binding.etResult.setText(state.data.convertResult)
+                binding.tvRate.text = state.data.rate
+
+                binding.rateGroup.visibility = View.VISIBLE
+            }
+            is NetworkResult.Error -> {
+                binding.loading.visibility = View.GONE
+                showErrorDialog(state.throwable.localizedMessage)
+            }
+        }
+    }
+
+    private fun renderHistory(histories: List<ConvertCurrency>) {
+        historyAdapter.updateData(histories)
     }
 
     override fun onClick(v: View?) {
@@ -113,7 +136,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
                         .setData(viewModel.currencies)
                         .setSelectedValue(viewModel.from)
                         .setOnClickListener { item ->
-                            viewModel.from = item.value ?: ""
+                            viewModel.submitAction(HomeUiAction.SetFrom(item.value ?: ""))
                             binding.tvFrom.text = item.value
                         }
                         .build()
@@ -125,7 +148,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
                         .setData(viewModel.currencies)
                         .setSelectedValue(viewModel.to)
                         .setOnClickListener { item ->
-                            viewModel.to = item.value ?: ""
+                            viewModel.submitAction(HomeUiAction.SetTo(item.value ?: ""))
                             binding.tvTo.text = item.value
                         }
                         .build()
@@ -136,7 +159,8 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
                         if (!binding.etAmount.text.isNullOrEmpty()) {
                             hideSoftKeyboard(requireActivity())
                             binding.rateGroup.visibility = View.INVISIBLE
-                            viewModel.convert(binding.etAmount.text.toString())
+
+                            viewModel.submitAction(HomeUiAction.Convert(binding.etAmount.text.toString()))
                         } else {
                             showErrorDialog("You haven't input the amount")
                         }
