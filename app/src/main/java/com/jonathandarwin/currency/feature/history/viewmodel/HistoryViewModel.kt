@@ -1,10 +1,10 @@
-package com.jonathandarwin.currency.view.viewmodel
+package com.jonathandarwin.currency.feature.history.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.jonathandarwin.currency.base.BaseViewModel
 import com.jonathandarwin.currency.base.model.NetworkResult
-import com.jonathandarwin.currency.view.model.HistoryUiModel
-import com.jonathandarwin.currency.view.model.event.HistoryUiEvent
+import com.jonathandarwin.currency.feature.history.model.HistoryUiModel
+import com.jonathandarwin.currency.feature.history.model.HistoryUiEvent
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
 import com.jonathandarwin.domain.model.ConvertCurrency
 import com.jonathandarwin.domain.util.launchWithCatch

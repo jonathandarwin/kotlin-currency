@@ -1,19 +1,18 @@
-package com.jonathandarwin.currency.view.fragment
+package com.jonathandarwin.currency.feature.history.fragment
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jonathandarwin.currency.R
 import com.jonathandarwin.currency.base.BaseFragment
 import com.jonathandarwin.currency.base.model.NetworkResult
 import com.jonathandarwin.currency.databinding.HistoryFragmentBinding
-import com.jonathandarwin.currency.view.adapter.HistoryAdapter
-import com.jonathandarwin.currency.view.model.event.HistoryUiEvent
-import com.jonathandarwin.currency.view.viewmodel.HistoryViewModel
+import com.jonathandarwin.currency.feature.history.adapter.HistoryAdapter
+import com.jonathandarwin.currency.feature.history.model.HistoryUiEvent
+import com.jonathandarwin.currency.feature.history.viewmodel.HistoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest

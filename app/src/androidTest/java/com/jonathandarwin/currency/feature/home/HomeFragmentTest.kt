@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.ui.home
+package com.jonathandarwin.currency.feature.home
 
 //import androidx.test.ext.junit.runners.AndroidJUnit4
 //import com.jonathandarwin.currency.util.launchFragmentInHiltContainer

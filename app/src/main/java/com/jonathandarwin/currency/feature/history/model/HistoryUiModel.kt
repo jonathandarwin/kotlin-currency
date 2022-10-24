@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.view.model
+package com.jonathandarwin.currency.feature.history.model
 
 import com.jonathandarwin.currency.base.model.NetworkResult
 import com.jonathandarwin.domain.model.ConvertCurrency

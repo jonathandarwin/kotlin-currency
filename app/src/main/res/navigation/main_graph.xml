@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.jonathandarwin.currency.ui.splash.SplashFragment"
+        android:name="com.jonathandarwin.currency.feature.splash.fragment.SplashFragment"
         android:label="SplashFragment" >
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.jonathandarwin.currency.ui.home.HomeFragment"
+        android:name="com.jonathandarwin.currency.feature.home.fragment.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_historyFragment"
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.jonathandarwin.currency.ui.history.HistoryFragment"
+        android:name="com.jonathandarwin.currency.feature.history.HistoryFragment"
         android:label="HistoryFragment" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.ui.home
+package com.jonathandarwin.currency.feature.home.model
 
 /**
  * Created By : Jonathan Darwin on March 27, 2021

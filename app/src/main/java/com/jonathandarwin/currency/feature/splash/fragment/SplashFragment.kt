@@ -1,20 +1,13 @@
-package com.jonathandarwin.currency.ui.splash
+package com.jonathandarwin.currency.feature.splash.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.jonathandarwin.currency.R
 import com.jonathandarwin.currency.base.BaseFragment
 import com.jonathandarwin.currency.databinding.SplashFragmentBinding
-import com.jonathandarwin.currency.util.ThemeUtil
+import com.jonathandarwin.currency.feature.splash.viewmodel.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * Created By : Jonathan Darwin on March 27, 2021
@@ -27,8 +20,8 @@ class SplashFragment : BaseFragment<SplashViewModel, SplashFragmentBinding>() {
     override fun onResume() {
         super.onResume()
 
-        lifecycleScope.launchWhenResumed {
-            delay(1000)
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            delay(SPLASH_DELAY)
 
             val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
             navigate(direction)
@@ -39,4 +32,8 @@ class SplashFragment : BaseFragment<SplashViewModel, SplashFragmentBinding>() {
     override fun getVM(): SplashViewModel = viewModel
 
     override fun getLayout(): Int = R.layout.splash_fragment
+
+    companion object {
+        private const val SPLASH_DELAY = 1000L
+    }
 }

@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.view.adapter
+package com.jonathandarwin.currency.feature.history.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

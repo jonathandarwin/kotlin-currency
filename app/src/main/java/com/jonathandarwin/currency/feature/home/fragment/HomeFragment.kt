@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.ui.home
+package com.jonathandarwin.currency.feature.home.fragment
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -11,7 +11,9 @@ import com.jonathandarwin.currency.R
 import com.jonathandarwin.currency.base.BaseFragment
 import com.jonathandarwin.currency.base.dialog.ListBottomSheetDialog
 import com.jonathandarwin.currency.databinding.HomeFragmentBinding
-import com.jonathandarwin.currency.view.adapter.HistoryAdapter
+import com.jonathandarwin.currency.feature.history.adapter.HistoryAdapter
+import com.jonathandarwin.currency.feature.home.viewmodel.HomeViewModel
+import com.jonathandarwin.currency.feature.home.model.HomeViewModelState
 import com.jonathandarwin.currency.util.ThemeUtil
 import dagger.hilt.android.AndroidEntryPoint
 

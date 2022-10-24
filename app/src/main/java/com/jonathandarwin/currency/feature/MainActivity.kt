@@ -1,4 +1,4 @@
-package com.jonathandarwin.currency.ui
+package com.jonathandarwin.currency.feature
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
