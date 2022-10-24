@@ -7,12 +7,11 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.button.MaterialButton
 import com.jonathandarwin.currency.R
 import com.jonathandarwin.currency.base.BaseFragment
 import com.jonathandarwin.currency.base.dialog.ListBottomSheetDialog
 import com.jonathandarwin.currency.databinding.HomeFragmentBinding
-import com.jonathandarwin.currency.ui.history.HistoryAdapter
+import com.jonathandarwin.currency.view.adapter.HistoryAdapter
 import com.jonathandarwin.currency.util.ThemeUtil
 import dagger.hilt.android.AndroidEntryPoint
 

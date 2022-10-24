@@ -2,8 +2,7 @@ package com.jonathandarwin.currency.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.jonathandarwin.currency.ui.history.HistoryViewModel
-import com.jonathandarwin.currency.ui.history.HistoryViewModelState
+import com.jonathandarwin.currency.view.viewmodel.HistoryViewModel
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
 import com.jonathandarwin.domain.model.ConvertCurrency
 import io.mockk.*
