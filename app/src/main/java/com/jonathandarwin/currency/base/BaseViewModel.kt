@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 
 /**
  * Created By : Jonathan Darwin on March 27, 2021
- */ 
+ */
+@Deprecated(message = "Please use ViewModel() instead.")
 abstract class BaseViewModel: ViewModel() {
 
     var error = MutableLiveData<Throwable>()

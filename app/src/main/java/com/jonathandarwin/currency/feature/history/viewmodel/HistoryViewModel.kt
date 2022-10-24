@@ -4,7 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.jonathandarwin.currency.base.BaseViewModel
 import com.jonathandarwin.currency.base.model.NetworkResult
 import com.jonathandarwin.currency.feature.history.model.HistoryUiModel
-import com.jonathandarwin.currency.feature.history.model.HistoryUiEvent
+import com.jonathandarwin.currency.feature.history.model.action.HistoryUiAction
+import com.jonathandarwin.currency.feature.history.model.event.HistoryUiEvent
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
 import com.jonathandarwin.domain.model.ConvertCurrency
 import com.jonathandarwin.domain.util.launchWithCatch
@@ -34,6 +35,12 @@ class HistoryViewModel @Inject constructor(
         getHistory()
     }
 
+    fun submitAction(action: HistoryUiAction) {
+        when(action) {
+            is HistoryUiAction.DeleteAllHistory -> handleDeleteAllHistory()
+        }
+    }
+
     private fun getHistory() {
         viewModelScope.launchWithCatch(block = {
             _histories.updateData(data = NetworkResult.Loading)
@@ -44,7 +51,7 @@ class HistoryViewModel @Inject constructor(
         }
     }
 
-    fun deleteAllHistory() {
+    private fun handleDeleteAllHistory() {
         viewModelScope.launchWithCatch(block = {
             _histories.updateData(data = NetworkResult.Loading)
             currencyUseCase.deleteAllHistory()
@@ -58,11 +65,6 @@ class HistoryViewModel @Inject constructor(
         value = _histories.value.copy(
             data = data
         )
-//        update {
-//            it.copy(
-//                data = data
-//            )
-//        }
     }
 
     companion object {

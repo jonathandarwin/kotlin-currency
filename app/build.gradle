@@ -43,6 +43,7 @@ dependencies {
     implementation rootProject.ext.ktx
     implementation rootProject.ext.appcompat
     implementation rootProject.ext.material
+    implementation rootProject.ext.fragmentKtx
 
     // RecyclerView
     implementation rootProject.ext.recyclerview
