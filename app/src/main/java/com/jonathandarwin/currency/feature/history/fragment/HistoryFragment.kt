@@ -13,7 +13,8 @@ import com.jonathandarwin.currency.base.BaseFragment
 import com.jonathandarwin.currency.base.model.NetworkResult
 import com.jonathandarwin.currency.databinding.HistoryFragmentBinding
 import com.jonathandarwin.currency.feature.history.adapter.HistoryAdapter
-import com.jonathandarwin.currency.feature.history.model.HistoryUiEvent
+import com.jonathandarwin.currency.feature.history.model.action.HistoryUiAction
+import com.jonathandarwin.currency.feature.history.model.event.HistoryUiEvent
 import com.jonathandarwin.currency.feature.history.viewmodel.HistoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -90,7 +91,7 @@ class HistoryFragment : BaseFragment<HistoryViewModel, HistoryFragmentBinding>()
                         .setTitle("Confirmation")
                         .setMessage("Are you sure want to delete all your history?")
                         .setPositiveButton("Yes") {
-                            _, _ -> viewModel.deleteAllHistory()
+                            _, _ -> viewModel.submitAction(HistoryUiAction.DeleteAllHistory)
                         }
                         .setNegativeButton("No") {
                             dialog, _ -> dialog.dismiss()

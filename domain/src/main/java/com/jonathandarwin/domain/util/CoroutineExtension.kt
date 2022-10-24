@@ -10,7 +10,7 @@ import kotlin.coroutines.EmptyCoroutineContext
  * Created By : Jonathan Darwin on October 24, 2022
  */
 fun CoroutineScope.launchWithCatch(
-    context: CoroutineContext = EmptyCoroutineContext,
+    context: CoroutineContext = coroutineContext,
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> Unit,
     catch: suspend (Throwable) -> Unit
