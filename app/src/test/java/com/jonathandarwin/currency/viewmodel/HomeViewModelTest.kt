@@ -1,18 +1,11 @@
 package com.jonathandarwin.currency.viewmodel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
-import com.jonathandarwin.currency.base.dialog.ListBottomSheet
 import com.jonathandarwin.currency.builder.CommonModelBuilder
 import com.jonathandarwin.currency.builder.CurrencyModelBuilder
-import com.jonathandarwin.currency.feature.history.model.HistoryUiModel
-import com.jonathandarwin.currency.feature.history.model.event.HistoryUiEvent
 import com.jonathandarwin.currency.feature.home.model.HomeUiState
 import com.jonathandarwin.currency.feature.home.viewmodel.HomeViewModel
-import com.jonathandarwin.currency.feature.home.model.HomeViewModelState
 import com.jonathandarwin.currency.feature.home.model.action.HomeUiAction
 import com.jonathandarwin.domain.abstraction.usecase.CurrencyUseCase
-import com.jonathandarwin.domain.model.Currency
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import junit.framework.Assert.assertEquals
@@ -25,13 +18,9 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import java.lang.Exception
 
 /**
  * Created By : Jonathan Darwin on October 21, 2021
