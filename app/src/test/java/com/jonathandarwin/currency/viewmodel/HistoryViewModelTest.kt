@@ -1,6 +1,8 @@
 package com.jonathandarwin.currency.viewmodel
 
 import com.jonathandarwin.currency.base.model.NetworkResult
+import com.jonathandarwin.currency.builder.CommonModelBuilder
+import com.jonathandarwin.currency.builder.CurrencyModelBuilder
 import com.jonathandarwin.currency.feature.history.model.event.HistoryUiEvent
 import com.jonathandarwin.currency.feature.history.model.HistoryUiModel
 import com.jonathandarwin.currency.feature.history.model.action.HistoryUiAction
@@ -21,6 +23,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
 import org.junit.*
+import java.lang.Exception
 
 /**
  * Created By : Jonathan Darwin on October 20, 2021
@@ -34,19 +37,18 @@ class HistoryViewModelTest {
 
     private lateinit var viewModel: HistoryViewModel
 
-    private val mockConvertCurrencyResponse = listOf(
-        ConvertCurrency("IDR", "USD", "10000", "1", "1", 123),
-        ConvertCurrency("IDR", "USD", "10000", "1", "1", 123)
-    )
+    /** Builder */
+    private val currencyBuilder = CurrencyModelBuilder()
+    private val commonBuilder = CommonModelBuilder()
+
+    /** Mock Response */
+    private val mockConvertCurrencyResponse = currencyBuilder.buildConvertCurrency()
+    private val mockException = commonBuilder.buildException()
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
         Dispatchers.setMain(testDispatcher)
-
-        coEvery { currencyUseCase.getConvertCurrencyHistory(any()) } returns mockConvertCurrencyResponse
-
-        viewModel = HistoryViewModel(currencyUseCase)
     }
 
     @After
@@ -56,7 +58,11 @@ class HistoryViewModelTest {
     }
 
     @Test
-    fun `when get history, then it should update history latest data`() {
+    fun `history_getHistory_success`() {
+
+        coEvery { currencyUseCase.getConvertCurrencyHistory(any()) } returns mockConvertCurrencyResponse
+
+        viewModel = HistoryViewModel(currencyUseCase)
 
         val states = recordStates { }
 
@@ -69,14 +75,47 @@ class HistoryViewModelTest {
     }
 
     @Test
-    fun `when delete history, then it should update the state`() {
+    fun `history_getHistory_error`() {
+
+        coEvery { currencyUseCase.getConvertCurrencyHistory(any()) } throws mockException
+
+        viewModel = HistoryViewModel(currencyUseCase)
+
+        val states = recordStates { }
+
+        when(val data = states[0].data) {
+            is NetworkResult.Error -> {
+                assertEquals(data.throwable, mockException)
+            }
+            else -> fail("Wrong state")
+        }
+    }
+
+
+    @Test
+    fun `history_deleteAll_success`() {
         coEvery { currencyUseCase.deleteAllHistory() } returns true
+
+        viewModel = HistoryViewModel(currencyUseCase)
 
         val events = recordEvents {
             viewModel.submitAction(HistoryUiAction.DeleteAllHistory)
         }
 
         assertEquals(events[0], HistoryUiEvent.HistoryDeleted)
+    }
+
+    @Test
+    fun `history_deleteAll_error`() {
+        coEvery { currencyUseCase.deleteAllHistory() } throws mockException
+
+        viewModel = HistoryViewModel(currencyUseCase)
+
+        val events = recordEvents {
+            viewModel.submitAction(HistoryUiAction.DeleteAllHistory)
+        }
+
+        assertEquals(events.size, 0)
     }
 
     private fun recordStates(block: () -> Unit): List<HistoryUiModel> {
