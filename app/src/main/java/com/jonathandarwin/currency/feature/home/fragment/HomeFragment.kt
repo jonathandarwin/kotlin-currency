@@ -4,8 +4,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jonathandarwin.currency.R
@@ -14,9 +14,9 @@ import com.jonathandarwin.currency.base.dialog.ListBottomSheetDialog
 import com.jonathandarwin.currency.base.model.NetworkResult
 import com.jonathandarwin.currency.databinding.HomeFragmentBinding
 import com.jonathandarwin.currency.feature.history.adapter.HistoryAdapter
+import com.jonathandarwin.currency.feature.history.fragment.HistoryFragment
 import com.jonathandarwin.currency.feature.home.model.ConversionResultUiModel
 import com.jonathandarwin.currency.feature.home.viewmodel.HomeViewModel
-import com.jonathandarwin.currency.feature.home.model.HomeViewModelState
 import com.jonathandarwin.currency.feature.home.model.action.HomeUiAction
 import com.jonathandarwin.currency.util.ThemeUtil
 import com.jonathandarwin.domain.model.ConvertCurrency
@@ -44,6 +44,15 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>(), View.On
         }
 
         setCurrentTheme()
+
+        setFragmentResultListener(HistoryFragment.HISTORY_FRAGMENT_REQUEST_KEY) { requestKey, bundle ->
+            val isHistoryAllDeleted = bundle[HistoryFragment.EXTRA_HISTORY_ALL_DELETED] as Boolean
+            if(isHistoryAllDeleted) viewModel.submitAction(HomeUiAction.LoadHistory)
+        }
+
+//        observeArgument<Boolean>(HistoryFragment.HISTORY_ALL_DELETED) { isAllDeleted ->
+//            if(isAllDeleted) viewModel.submitAction(HomeUiAction.LoadHistory)
+//        }
     }
 
     override fun initListener() {

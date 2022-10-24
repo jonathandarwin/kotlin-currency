@@ -102,6 +102,23 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
         findNavController().popBackStack()
     }
 
+    protected fun <T> observeArgument(key: String, observer: (T) -> Unit) {
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<T>(key)
+            ?.observe(viewLifecycleOwner, Observer {
+                observer(it)
+            })
+    }
+
+    protected fun <T> setResultArgument(key: String, value: T) {
+        findNavController()
+            .previousBackStackEntry
+            ?.savedStateHandle
+            ?.set(key, value)
+    }
+
     abstract fun getVM() : VM
     abstract fun getLayout() : Int
 }

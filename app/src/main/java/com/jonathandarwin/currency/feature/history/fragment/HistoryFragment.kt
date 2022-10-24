@@ -3,6 +3,8 @@ package com.jonathandarwin.currency.feature.history.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,7 +69,13 @@ class HistoryFragment : BaseFragment<HistoryViewModel, HistoryFragmentBinding>()
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.event.collect {
                 when(it) {
-                    HistoryUiEvent.HistoryDeleted -> finish()
+                    HistoryUiEvent.HistoryDeleted -> {
+                        setFragmentResult(
+                            HISTORY_FRAGMENT_REQUEST_KEY,
+                            bundleOf(EXTRA_HISTORY_ALL_DELETED to true)
+                        )
+                        finish()
+                    }
                 }
             }
         }
@@ -96,4 +104,9 @@ class HistoryFragment : BaseFragment<HistoryViewModel, HistoryFragmentBinding>()
     override fun getVM(): HistoryViewModel = viewModel
 
     override fun getLayout(): Int = R.layout.history_fragment
+
+    companion object {
+        const val HISTORY_FRAGMENT_REQUEST_KEY = "HISTORY_FRAGMENT_REQUEST_KEY"
+        const val EXTRA_HISTORY_ALL_DELETED = "EXTRA_HISTORY_ALL_DELETED"
+    }
 }

@@ -68,6 +68,7 @@ class HomeViewModel @Inject constructor(
             is HomeUiAction.SetFrom -> handleSetFrom(action.from)
             is HomeUiAction.SetTo -> handleSetTo(action.to)
             is HomeUiAction.Convert -> handleConvert(action.amount)
+            is HomeUiAction.LoadHistory -> handleLoadHistory()
         }
     }
 
@@ -98,6 +99,10 @@ class HomeViewModel @Inject constructor(
         }) {
             _conversionResult.updateData(NetworkResult.Error(it))
         }
+    }
+
+    private fun handleLoadHistory() {
+        getPreviewHistory()
     }
 
     private fun getCurrency() {

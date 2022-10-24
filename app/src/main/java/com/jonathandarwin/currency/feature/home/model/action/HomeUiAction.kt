@@ -10,4 +10,6 @@ sealed class HomeUiAction {
     data class SetTo(val to: String) : HomeUiAction()
 
     data class Convert(val amount: String): HomeUiAction()
+
+    object LoadHistory : HomeUiAction()
 }
