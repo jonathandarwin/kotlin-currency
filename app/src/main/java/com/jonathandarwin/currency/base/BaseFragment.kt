@@ -53,12 +53,12 @@ abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fra
 
     }
 
-    protected open fun showErrorDialog(message: String) {
+    protected open fun showErrorDialog(message: String?) {
         removeAllView()
 
         errorDialog = ErrorBottomSheetBinding.inflate(LayoutInflater.from(requireContext()), null, false)
         errorDialog.tvTitle.text = "Error"
-        errorDialog.tvDescription.text = message
+        errorDialog.tvDescription.text = message ?: "Something went wrong."
 
         val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         dialog.setContentView(errorDialog.root)

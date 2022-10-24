@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.jonathandarwin.currency.feature.history.HistoryFragment"
+        android:name="com.jonathandarwin.currency.feature.history.fragment.HistoryFragment"
         android:label="HistoryFragment" />
 
 </navigation>

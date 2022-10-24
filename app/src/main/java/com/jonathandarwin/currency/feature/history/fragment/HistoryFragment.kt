@@ -58,7 +58,7 @@ class HistoryFragment : BaseFragment<HistoryViewModel, HistoryFragmentBinding>()
                     }
                     is NetworkResult.Error -> {
                         binding.loading.visibility = View.GONE
-                        showErrorDialog(result.throwable.localizedMessage ?: "Something went wrong.")
+                        showErrorDialog(result.throwable.localizedMessage)
                     }
                 }
             }
